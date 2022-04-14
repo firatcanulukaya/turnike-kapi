@@ -5,7 +5,7 @@ const authCheck = (req, res, next) => {
 
     if (!token) {
         return res.status(403).json({
-            message: "A token is required for authentication",
+            message: "TOKEN_NOT_FOUND",
             statusCode: 403,
         });
     }
@@ -15,7 +15,7 @@ const authCheck = (req, res, next) => {
         });
         req.user = decoded;
     } catch (err) {
-        return res.status(401).json({ message: "Invalid Token", statusCode: 401 });
+        return res.status(401).json({ message: "INVALID_TOKEN", statusCode: 401 });
     }
     return next();
 };
