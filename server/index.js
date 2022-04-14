@@ -6,8 +6,8 @@ const app = express();
 app.use(json())
 app.use(cors())
 
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
+const studentRoute = require("./routes/student.route");
+
+app.use("/api/student", studentRoute);
 
 app.listen(3001, () => console.log(`Server started at http://localhost:3001`))
