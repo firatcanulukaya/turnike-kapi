@@ -14,7 +14,7 @@ const createStudent = async (req, res) => {
         const student = await db.Student.create({
             nameSurname,
             password,
-            roleId: 2,
+            roleId: 3,
             idCard,
             rfid,
             studentId,
@@ -23,7 +23,7 @@ const createStudent = async (req, res) => {
             testResult
         });
 
-        return MessageService(res, "Student Created", student);
+        return MessageService(res, student);
     } catch (error) {
 
         if (error.message.includes("notNull Violation")) {
@@ -71,6 +71,10 @@ const updateStudent = async (req, res) => {
     try {
         const {id} = req.params;
 
+        if (req.body.roleId > 3 || req.body.roleId < 1) {
+            throw new Error("INVALID_ROLE");
+        }
+
         await db.Student.update(req.body,
             {
                 where: {
@@ -83,7 +87,11 @@ const updateStudent = async (req, res) => {
 
         return MessageService(res, updatedStudent);
     } catch (error) {
-        return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+        if (error.message.includes("INVALID_ROLE")) {
+            return ErrorService(res, {message: "INVALID_ROLE"});
+        } else {
+            return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+        }
     }
 }
 
