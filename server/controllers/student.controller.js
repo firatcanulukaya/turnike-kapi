@@ -14,6 +14,7 @@ const createStudent = async (req, res) => {
         const student = await db.Student.create({
             nameSurname,
             password,
+            roleId: 2,
             idCard,
             rfid,
             studentId,
