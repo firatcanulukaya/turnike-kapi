@@ -22,9 +22,13 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign(
-            {id: user.id},
+            {
+                id: user.id,
+                idCard: user.idCard,
+                rfid: user.rfid,
+            },
             "ooml",
-            {expiresIn: "1h"});
+            {expiresIn: "24h"});
         return MessageService(res, token);
     } catch (error) {
 
