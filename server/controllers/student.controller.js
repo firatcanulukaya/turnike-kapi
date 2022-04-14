@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require('bcrypt');
 const ErrorService = require("../services/error.service");
 const MessageService = require("../services/message.service");
 
@@ -11,9 +12,10 @@ const createStudent = async (req, res) => {
             throw new Error("STUDENT_ALREADY_EXISTS");
         }
 
+        const hashedPassword = await bcrypt.hash(password, 10);
         const student = await db.Student.create({
             nameSurname,
-            password,
+            password: hashedPassword,
             roleId: 3,
             idCard,
             rfid,
