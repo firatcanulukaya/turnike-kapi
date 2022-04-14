@@ -25,6 +25,7 @@ const login = async (req, res) => {
             {
                 id: user.id,
                 idCard: user.idCard,
+                roleId: user.roleId,
                 rfid: user.rfid,
             },
             "ooml",
