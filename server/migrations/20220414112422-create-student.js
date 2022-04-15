@@ -21,7 +21,7 @@ module.exports = {
                 allowNull: false,
             },
             idCard: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.BIGINT,
                 allowNull: false
             },
             rfid: {
