@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const {getResult} = require("../controllers/covidTest.controller");
+const {createResult} = require("../controllers/covidTest.controller");
 
-router.get("/getResult", getResult);
+router.post("/create", createResult);
 
 module.exports = router;
