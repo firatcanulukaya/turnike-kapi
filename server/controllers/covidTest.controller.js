@@ -18,6 +18,16 @@ const createResult = async (req, res) => {
             throw new Error("BARCODE_ALREADY_EXIST");
         }
 
+        const studentId = await db.Student.findOne({
+            where: {
+                idCard
+            }
+        });
+
+        if (!studentId) {
+            throw new Error("STUDENT_NOT_FOUND");
+        }
+
         axios.get(`https://covid-19.gov.ct.tr/QRdogrula/${barcode}/${idCard}`)
             .then(async response => {
                 let data = response.data;
@@ -26,20 +36,38 @@ const createResult = async (req, res) => {
                     testDate: data.match(regex)[0]
                 }
 
-                const studentId = await db.Student.findOne({
+                const findTest = await db.CovidTest.findOne({
                     where: {
                         idCard
                     }
                 });
 
-                const covidTest = await db.CovidTest.create({
-                    idCard,
-                    barcode,
-                    userId: studentId.id,
-                    ...newData
+                if (findTest) {
+                    await db.CovidTest.update({
+                            barcode,
+                            ...newData
+                        },
+                        {
+                            where: {
+                                idCard
+                            }
+                        });
+                } else {
+                    await db.CovidTest.create({
+                        idCard,
+                        barcode,
+                        userId: studentId.id,
+                        ...newData
+                    });
+                }
+
+                const createdCovidTest = await db.CovidTest.findOne({
+                    where: {
+                        barcode
+                    }
                 });
 
-                MessageService(res, covidTest);
+                MessageService(res, createdCovidTest);
             })
             .catch(error => {
                 throw new Error(error);
@@ -47,6 +75,8 @@ const createResult = async (req, res) => {
     } catch (error) {
         if (error.message.includes("BARCODE_ALREADY_EXIST")) {
             ErrorService(res, {message: "BARCODE_ALREADY_EXIST"});
+        } else if (error.message.includes("STUDENT_NOT_FOUND")) {
+            ErrorService(res, {message: "STUDENT_NOT_FOUND"});
         } else {
             ErrorService(res, error);
         }
