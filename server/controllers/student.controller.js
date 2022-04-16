@@ -33,7 +33,7 @@ const createStudent = async (req, res) => {
         } else if (error.message.includes("STUDENT_ALREADY_EXISTS")) {
             return ErrorService(res, {message: "STUDENT_ALREADY_EXISTS"});
         } else {
-            return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+            return ErrorService(res, error);
         }
 
     }
@@ -41,11 +41,15 @@ const createStudent = async (req, res) => {
 
 const getAllStudents = async (req, res) => {
     try {
-        const students = await db.Student.findAll({where: {}});
+        const students = await db.Student.findAll({
+            attributes: {
+                exclude: ["password"]
+            },
+        });
 
         return MessageService(res, students);
     } catch (error) {
-        return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+        return ErrorService(res, error);
     }
 }
 
@@ -53,7 +57,13 @@ const getStudentById = async (req, res) => {
     try {
         const {id} = req.params;
 
-        const student = await db.Student.findOne({where: {id}});
+        const student = await db.Student.findOne(
+            {
+                where: {id},
+                attributes: {
+                    exclude: ["password"]
+                },
+            });
 
         if (!student) {
             throw new Error("STUDENT_NOT_FOUND");
@@ -64,7 +74,7 @@ const getStudentById = async (req, res) => {
         if (error.message.includes("STUDENT_NOT_FOUND")) {
             return ErrorService(res, {message: "STUDENT_NOT_FOUND"});
         } else {
-            return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+            return ErrorService(res, error);
         }
     }
 }
@@ -81,7 +91,10 @@ const updateStudent = async (req, res) => {
             {
                 where: {
                     id
-                }
+                },
+                attributes: {
+                    exclude: ["password"]
+                },
             }
         );
 
@@ -92,7 +105,7 @@ const updateStudent = async (req, res) => {
         if (error.message.includes("INVALID_ROLE")) {
             return ErrorService(res, {message: "INVALID_ROLE"});
         } else {
-            return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+            return ErrorService(res, error);
         }
     }
 }
@@ -109,7 +122,7 @@ const deleteStudent = async (req, res) => {
 
         return MessageService(res, "ok");
     } catch (error) {
-        return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+        return ErrorService(res, error);
     }
 }
 
@@ -122,7 +135,7 @@ const deleteAllStudents = async (req, res) => {
 
         return MessageService(res, "ok");
     } catch (error) {
-        return ErrorService(res, {message: "INTERNAL_SERVER_ERROR"});
+        return ErrorService(res, error);
     }
 }
 
