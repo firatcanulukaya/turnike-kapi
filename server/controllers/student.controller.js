@@ -45,6 +45,13 @@ const getAllStudents = async (req, res) => {
             attributes: {
                 exclude: ["password"]
             },
+            include: [{
+                model: db.CovidTest,
+                as: "covidTest",
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "userId"]
+                }
+            }]
         });
 
         return MessageService(res, students);

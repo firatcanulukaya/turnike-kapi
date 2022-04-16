@@ -26,9 +26,16 @@ const createResult = async (req, res) => {
                     testDate: data.match(regex)[0]
                 }
 
+                const studentId = await db.Student.findOne({
+                    where: {
+                        idCard
+                    }
+                });
+
                 const covidTest = await db.CovidTest.create({
                     idCard,
                     barcode,
+                    userId: studentId.id,
                     ...newData
                 });
 
