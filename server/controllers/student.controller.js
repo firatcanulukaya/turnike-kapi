@@ -12,6 +12,11 @@ const createStudent = async (req, res) => {
             throw new Error("STUDENT_ALREADY_EXISTS");
         }
 
+        let getRfid = await db.Student.findOne({where: {rfid}});
+        if (getRfid) {
+            throw new Error("RFID_ALREADY_EXISTS");
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const student = await db.Student.create({
             nameSurname,
@@ -32,8 +37,10 @@ const createStudent = async (req, res) => {
             return ErrorService(res, {message: "MISSING_PARAM"});
         } else if (error.message.includes("STUDENT_ALREADY_EXISTS")) {
             return ErrorService(res, {message: "STUDENT_ALREADY_EXISTS"});
+        } else if (error.message.includes("RFID_ALREADY_EXISTS")) {
+            return ErrorService(res, {message: "RFID_ALREADY_EXISTS"});
         } else {
-            return ErrorService(res, error);
+            return ErrorService(res, {message: "UNKNOWN_ERROR"});
         }
 
     }
