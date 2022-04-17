@@ -10,13 +10,14 @@ const {
     deleteResult,
     getResultById
 } = require("../controllers/covidTest.controller");
+const roleCheck = require("../middlewares/roleCheck.middleware");
 
 router.post("/create", createResult);
-router.get("/getAll", getResults);
-router.get("/getByBarcode/:barcode", getResult);
-router.get("/getById/:id", getResultById);
-router.patch("/update/:id", updateResult);
-router.delete("/deleteAll", deleteAllResults);
-router.delete("/delete/:id", deleteResult);
+router.get("/getAll", roleCheck([2]), getResults);
+router.get("/getByBarcode/:barcode", roleCheck([2]), getResult);
+router.get("/getById/:id", roleCheck([2]), getResultById);
+router.patch("/update/:id", roleCheck([2]), updateResult);
+router.delete("/deleteAll", roleCheck([2]), deleteAllResults);
+router.delete("/delete/:id", roleCheck([2]), deleteResult);
 
 module.exports = router;
