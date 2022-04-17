@@ -44,11 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         department: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        testResult: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
+        }
     }, {
         sequelize,
         modelName: 'Student',
