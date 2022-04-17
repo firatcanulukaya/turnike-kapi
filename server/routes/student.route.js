@@ -16,6 +16,6 @@ router.get("/getAll", getAllStudents);
 router.get("/get/:id", getStudentById);
 router.patch("/update/:id", roleCheck([2]), updateStudent);
 router.delete("/delete/:id", roleCheck([2]), deleteStudent);
-router.delete("/deleteAll", roleCheck([2]), deleteAllStudents);
+router.delete("/deleteAll", roleCheck(), deleteAllStudents);
 
 module.exports = router;

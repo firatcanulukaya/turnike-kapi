@@ -104,9 +104,13 @@ const updateStudent = async (req, res) => {
     try {
         const {id} = req.params;
 
-        if (req.body.roleId > 3 || req.body.roleId < 1) {
+        if (req.body.roleId > 3 || req.body.roleId < 2) {
             throw new Error("INVALID_ROLE");
         }
+
+        const student = await db.Student.findOne({where: {id}});
+
+        if (student.dataValues.roleId < req.user.roleId) throw new Error("FORBIDDEN");
 
         await db.Student.update(req.body,
             {
@@ -125,6 +129,8 @@ const updateStudent = async (req, res) => {
     } catch (error) {
         if (error.message.includes("INVALID_ROLE")) {
             return ErrorService(res, {message: "INVALID_ROLE"});
+        } else if (error.message.includes("FORBIDDEN")) {
+            return ErrorService(res, {message: "FORBIDDEN"});
         } else {
             return ErrorService(res, error);
         }
@@ -134,6 +140,10 @@ const updateStudent = async (req, res) => {
 const deleteStudent = async (req, res) => {
     try {
         const {id} = req.params;
+
+        const student = await db.Student.findOne({where: {id}});
+
+        if (student.dataValues.roleId < req.user.roleId) throw new Error("FORBIDDEN");
 
         await db.Student.destroy({
             where: {
@@ -149,7 +159,11 @@ const deleteStudent = async (req, res) => {
 
         return MessageService(res, "ok");
     } catch (error) {
-        return ErrorService(res, error);
+        if (error.message.includes("FORBIDDEN")) {
+            return ErrorService(res, {message: "FORBIDDEN"});
+        } else {
+            return ErrorService(res, error);
+        }
     }
 }
 
