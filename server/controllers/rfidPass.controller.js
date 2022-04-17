@@ -45,17 +45,24 @@ const rfidPass = async (req, res) => {
         var b = moment([testDate.getFullYear(), testDate.getMonth(), testDate.getDate()]);
         var diff = a.diff(b, 'days');
 
-        if (diff >= 7 || jsonedCovid.testResult) {
-            MessageService(res, false);
-        } else {
-            MessageService(res, true);
+        if (diff >= 7) {
+            throw new Error("COVID_TEST_EXPIRED");
         }
 
+        if (jsonedCovid.testResult) {
+            throw new Error("COVID_TEST_POSITIVE");
+        }
+
+        MessageService(res, true);
     } catch (error) {
         if (error.message.includes("STUDENT_NOT_FOUND")) {
             ErrorService(res, {message: "STUDENT_NOT_FOUND"});
         } else if (error.message.includes("COVID_TEST_NOT_FOUND")) {
             ErrorService(res, {message: "COVID_TEST_NOT_FOUND"});
+        } else if (error.message.includes("COVID_TEST_EXPIRED")) {
+            ErrorService(res, {message: "COVID_TEST_EXPIRED"});
+        } else if (error.message.includes("COVID_TEST_POSITIVE")) {
+            ErrorService(res, {message: "COVID_TEST_POSITIVE"});
         } else {
             ErrorService(res, error);
         }
