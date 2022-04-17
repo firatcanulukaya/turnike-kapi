@@ -28,7 +28,7 @@ const rfidPass = async (req, res) => {
             where: {
                 userId: student.id
             },
-            attributes: ["testDate"],
+            attributes: ["testDate", "testResult"],
         });
 
         if (!covid) {
@@ -45,7 +45,7 @@ const rfidPass = async (req, res) => {
         var b = moment([testDate.getFullYear(), testDate.getMonth(), testDate.getDate()]);
         var diff = a.diff(b, 'days');
 
-        if (diff >= 7) {
+        if (diff >= 7 || jsonedCovid.testResult) {
             MessageService(res, false);
         } else {
             MessageService(res, true);
