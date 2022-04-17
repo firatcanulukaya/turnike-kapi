@@ -141,6 +141,12 @@ const deleteStudent = async (req, res) => {
             }
         });
 
+        await db.CovidTest.destroy({
+            where: {
+                userId: id
+            }
+        });
+
         return MessageService(res, "ok");
     } catch (error) {
         return ErrorService(res, error);
@@ -149,7 +155,13 @@ const deleteStudent = async (req, res) => {
 
 const deleteAllStudents = async (req, res) => {
     try {
+
         await db.Student.destroy({
+            where: {},
+            truncate: true
+        });
+
+        await db.CovidTest.destroy({
             where: {},
             truncate: true
         });
