@@ -1,7 +1,10 @@
+import {useSelector} from "react-redux";
+
 const App = () => {
+    const {test} = useSelector(state => state.utils);
     return (
         <div>
-            Hello world
+            {test}
         </div>
     );
 }
