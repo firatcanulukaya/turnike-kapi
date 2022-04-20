@@ -28,50 +28,52 @@ const createResult = async (req, res) => {
             throw new Error("STUDENT_NOT_FOUND");
         }
 
-        axios.get(`https://covid-19.gov.ct.tr/QRdogrula/${barcode}/${idCard}`)
-            .then(async response => {
-                let data = response.data;
-                let newData = {
-                    testResult: !!data.includes("POZİTİF"),
-                    testDate: data.match(regex)[0]
-                }
+        let response = await axios.get(`https://covid-19.gov.ct.tr/QRdogrula/${barcode}/${idCard}`)
 
-                const findTest = await db.CovidTest.findOne({
+        let data = response.data;
+
+        if (data.match(regex) === null) {
+            throw new Error("BARCODE_NOT_VALID");
+        }
+
+        let newData = {
+            testResult: !!data.includes("POZİTİF"),
+            testDate: data.match(regex)[0]
+        }
+
+        const findTest = await db.CovidTest.findOne({
+            where: {
+                idCard
+            }
+        });
+
+        if (findTest) {
+            await db.CovidTest.update({
+                    barcode,
+                    ...newData
+                },
+                {
                     where: {
                         idCard
                     }
                 });
+        } else {
+            await db.CovidTest.create({
+                idCard,
+                barcode,
+                userId: studentId.id,
+                ...newData
+            });
+        }
 
-                if (findTest) {
-                    await db.CovidTest.update({
-                            barcode,
-                            ...newData
-                        },
-                        {
-                            where: {
-                                idCard
-                            }
-                        });
-                } else {
-                    await db.CovidTest.create({
-                        idCard,
-                        barcode,
-                        userId: studentId.id,
-                        ...newData
-                    });
-                }
+        const createdCovidTest = await db.CovidTest.findOne({
+            where: {
+                barcode
+            }
+        });
 
-                const createdCovidTest = await db.CovidTest.findOne({
-                    where: {
-                        barcode
-                    }
-                });
+        MessageService(res, createdCovidTest);
 
-                MessageService(res, createdCovidTest);
-            })
-            .catch(error => {
-                throw new Error(error);
-            })
     } catch (error) {
         if (error.message.includes("BARCODE_ALREADY_EXIST")) {
             ErrorService(res, {message: "BARCODE_ALREADY_EXIST"});
@@ -118,11 +120,7 @@ const getResult = async (req, res) => {
 
         MessageService(res, covidTest);
     } catch (error) {
-        if (error.message.includes("RESULT_NOT_FOUND")) {
-            ErrorService(res, {message: "RESULT_NOT_FOUND"});
-        } else {
-            ErrorService(res, error);
-        }
+        ErrorService(res, error);
     }
 };
 
