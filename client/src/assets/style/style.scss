@@ -10,3 +10,8 @@
   background: none;
   font-family: 'Poppins', sans-serif;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
