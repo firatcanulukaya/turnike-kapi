@@ -75,13 +75,7 @@ const createResult = async (req, res) => {
         MessageService(res, createdCovidTest);
 
     } catch (error) {
-        if (error.message.includes("BARCODE_ALREADY_EXIST")) {
-            ErrorService(res, {message: "BARCODE_ALREADY_EXIST"});
-        } else if (error.message.includes("STUDENT_NOT_FOUND")) {
-            ErrorService(res, {message: "STUDENT_NOT_FOUND"});
-        } else {
-            ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 };
 
@@ -97,11 +91,7 @@ const getResults = async (req, res) => {
 
         MessageService(res, covidTests);
     } catch (error) {
-        if (error.message.includes("NO_RESULTS_FOUND")) {
-            ErrorService(res, {message: "NO_RESULTS_FOUND"});
-        } else {
-            ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 };
 
@@ -120,7 +110,7 @@ const getResult = async (req, res) => {
 
         MessageService(res, covidTest);
     } catch (error) {
-        ErrorService(res, error);
+        return ErrorService(res, error);
     }
 };
 
@@ -139,11 +129,7 @@ const getResultById = async (req, res) => {
 
         MessageService(res, covidTest);
     } catch (error) {
-        if (error.message.includes("RESULT_NOT_FOUND")) {
-            ErrorService(res, {message: "RESULT_NOT_FOUND"});
-        } else {
-            ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 };
 
@@ -171,11 +157,7 @@ const updateResult = async (req, res) => {
 
         MessageService(res, updatedCovidTest);
     } catch (error) {
-        if (error.message.includes("RESULT_NOT_FOUND")) {
-            ErrorService(res, {message: "RESULT_NOT_FOUND"});
-        } else {
-            ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 };
 
@@ -221,11 +203,7 @@ const deleteAllResults = async (req, res) => {
 
         MessageService(res, "ok");
     } catch (error) {
-        if (error.message.includes("NO_RESULTS_FOUND")) {
-            ErrorService(res, {message: "NO_RESULTS_FOUND"});
-        } else {
-            ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 };
 

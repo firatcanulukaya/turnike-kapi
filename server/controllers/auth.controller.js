@@ -32,15 +32,7 @@ const login = async (req, res) => {
             {expiresIn: "24h"});
         return MessageService(res, token);
     } catch (error) {
-
-        if (error.message.includes("USER_NOT_FOUND")) {
-            return ErrorService(res, {message: "USER_NOT_FOUND"});
-        } else if (error.message.includes({message: "INVALID_PASSWORD"})) {
-            return ErrorService(res, "INVALID_PASSWORD");
-        } else {
-            return ErrorService(res, {message: error.message});
-        }
-
+        return ErrorService(res, error);
     }
 };
 
@@ -73,13 +65,7 @@ const register = async (req, res) => {
 
         return MessageService(res, student);
     } catch (error) {
-        if (error.message === "STUDENT_ALREADY_EXISTS") {
-            return ErrorService(res, {message: "STUDENT_ALREADY_EXISTS"});
-        } else if (error.message === "RFID_ALREADY_EXISTS") {
-            return ErrorService(res, {message: "RFID_ALREADY_EXISTS"});
-        } else {
-            return ErrorService(res, {message: error.message});
-        }
+        return ErrorService(res, error);
     }
 };
 

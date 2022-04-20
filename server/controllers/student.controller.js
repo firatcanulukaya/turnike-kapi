@@ -32,17 +32,7 @@ const createStudent = async (req, res) => {
 
         return MessageService(res, student);
     } catch (error) {
-
-        if (error.message.includes("notNull Violation")) {
-            return ErrorService(res, {message: "MISSING_PARAM"});
-        } else if (error.message.includes("STUDENT_ALREADY_EXISTS")) {
-            return ErrorService(res, {message: "STUDENT_ALREADY_EXISTS"});
-        } else if (error.message.includes("RFID_ALREADY_EXISTS")) {
-            return ErrorService(res, {message: "RFID_ALREADY_EXISTS"});
-        } else {
-            return ErrorService(res, {message: "UNKNOWN_ERROR"});
-        }
-
+        return ErrorService(res, error);
     }
 }
 
@@ -92,11 +82,7 @@ const getStudentById = async (req, res) => {
 
         return MessageService(res, student);
     } catch (error) {
-        if (error.message.includes("STUDENT_NOT_FOUND")) {
-            return ErrorService(res, {message: "STUDENT_NOT_FOUND"});
-        } else {
-            return ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 }
 
@@ -127,13 +113,7 @@ const updateStudent = async (req, res) => {
 
         return MessageService(res, updatedStudent);
     } catch (error) {
-        if (error.message.includes("INVALID_ROLE")) {
-            return ErrorService(res, {message: "INVALID_ROLE"});
-        } else if (error.message.includes("FORBIDDEN")) {
-            return ErrorService(res, {message: "FORBIDDEN"});
-        } else {
-            return ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 }
 
@@ -159,11 +139,7 @@ const deleteStudent = async (req, res) => {
 
         return MessageService(res, "ok");
     } catch (error) {
-        if (error.message.includes("FORBIDDEN")) {
-            return ErrorService(res, {message: "FORBIDDEN"});
-        } else {
-            return ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 }
 

@@ -55,17 +55,7 @@ const rfidPass = async (req, res) => {
 
         MessageService(res, true);
     } catch (error) {
-        if (error.message.includes("STUDENT_NOT_FOUND")) {
-            ErrorService(res, {message: "STUDENT_NOT_FOUND"});
-        } else if (error.message.includes("COVID_TEST_NOT_FOUND")) {
-            ErrorService(res, {message: "COVID_TEST_NOT_FOUND"});
-        } else if (error.message.includes("COVID_TEST_EXPIRED")) {
-            ErrorService(res, {message: "COVID_TEST_EXPIRED"});
-        } else if (error.message.includes("COVID_TEST_POSITIVE")) {
-            ErrorService(res, {message: "COVID_TEST_POSITIVE"});
-        } else {
-            ErrorService(res, error);
-        }
+        return ErrorService(res, error);
     }
 }
 
