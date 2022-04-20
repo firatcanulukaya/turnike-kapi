@@ -6,14 +6,14 @@ import "./assets/style/style.css";
 const App = () => {
     const {test} = useSelector(state => state.utils);
     return (
-        <div>
+        <>
             <Routes>
                 {routes.map((route, index) => (
                     <Route key={index} exact={route.exact} path={route.path}
                            element={<route.component/>}/>
                 ))}
             </Routes>
-        </div>
+        </>
     );
 }
 
