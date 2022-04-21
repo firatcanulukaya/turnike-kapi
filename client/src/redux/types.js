@@ -1,1 +1,2 @@
-export const TEST = 'TEST';
+//USER
+export const LOGIN_USER = 'LOGIN_USER';
