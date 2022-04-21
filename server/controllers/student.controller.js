@@ -2,6 +2,7 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const ErrorService = require("../services/error.service");
 const MessageService = require("../services/message.service");
+const jwt = require("jsonwebtoken");
 
 const createStudent = async (req, res) => {
     try {
@@ -162,11 +163,44 @@ const deleteAllStudents = async (req, res) => {
     }
 }
 
+const getStudentByJWTToken = async (req, res) => {
+    try {
+
+        const token = req.headers["x-access-token"];
+
+        const decoded = jwt.verify(token, "ooml", {
+            algorithms: ["HS256"]
+        });
+
+        const student = await db.Student.findOne({
+            where: {
+                id: decoded.id
+            },
+            attributes: {
+                exclude: ["password"]
+            },
+            include: [{
+                model: db.CovidTest,
+                as: "covidTest",
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "userId"]
+                }
+            }]
+        });
+
+        return MessageService(res, student);
+
+    } catch (error) {
+        return ErrorService(res, error);
+    }
+}
+
 module.exports = {
     createStudent,
     getAllStudents,
     getStudentById,
     updateStudent,
     deleteStudent,
-    deleteAllStudents
+    deleteAllStudents,
+    getStudentByJWTToken
 }

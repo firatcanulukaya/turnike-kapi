@@ -7,7 +7,8 @@ const {
     getStudentById,
     updateStudent,
     deleteStudent,
-    deleteAllStudents
+    deleteAllStudents,
+    getStudentByJWTToken
 } = require("../controllers/student.controller");
 const roleCheck = require("../middlewares/roleCheck.middleware");
 
@@ -17,5 +18,6 @@ router.get("/get/:id", getStudentById);
 router.patch("/update/:id", roleCheck([2]), updateStudent);
 router.delete("/delete/:id", roleCheck([2]), deleteStudent);
 router.delete("/deleteAll", roleCheck(), deleteAllStudents);
+router.get("/getByJWTToken", getStudentByJWTToken);
 
 module.exports = router;
