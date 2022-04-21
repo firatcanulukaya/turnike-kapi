@@ -16,4 +16,25 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+.ajs-message {
+  border-radius: 5px !important;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.ajs-error {
+  background-color: #f2dede !important;
+  color: #a94442 !important;
+}
+
+.ajs-success {
+  background-color: #dff0d8 !important;
+  color: #3c763d !important;
+}
+
+.ajs-warning {
+  background-color: #fcf8e3 !important;
+  color: #8a6d3b !important;
+}
+
 /*# sourceMappingURL=style.css.map */
