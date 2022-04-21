@@ -6,6 +6,14 @@ const app = express();
 app.use(json())
 app.use(cors())
 
+app.use(function (req, res, next) {
+    res.setHeader("X-Powered-By", "12-BT IT TEAM V1.0.0 - 2022");
+    res.setHeader("*FiratcanUlukaya", "Web Developer");
+    res.setHeader("*AzatYalcin", "Arduino Developer");
+    res.setHeader("*BurakGurses", "Arduino Developer");
+    next();
+});
+
 const authCheck = require("./middlewares/authCheck.middleware");
 
 const studentRoute = require("./routes/student.route");
