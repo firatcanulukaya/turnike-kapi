@@ -1,6 +1,7 @@
 import {Routes, Route} from "react-router-dom";
 import {routes} from "./routes";
 import "./assets/style/style.css";
+import "alertifyjs/build/css/alertify.min.css";
 
 const App = () => {
     return (
