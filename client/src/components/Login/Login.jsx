@@ -1,5 +1,5 @@
 import {loginUser} from "../../redux/actions/userAction";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {
     Button,
     ColFull,
@@ -17,7 +17,6 @@ import logo from "../../assets/img/oomlLogo.png";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const {user} = useSelector(state => state.user);
 
     const {
         register,
