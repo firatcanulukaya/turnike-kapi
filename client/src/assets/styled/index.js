@@ -51,6 +51,16 @@ export const Title = styled.h1`
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 20px;
+  
+  @media only screen and (max-width: 600px) {
+    font-size: 16px;
+  }
+  @media only screen and (min-width: 600px) {
+    font-size: 16px;
+  }
+  @media only screen and (min-width: 900px) {
+    font-size: 24px;
+  }
 `;
 
 export const SubTitle = styled.h2`
@@ -58,6 +68,16 @@ export const SubTitle = styled.h2`
   font-weight: 500;
   margin-bottom: 20px;
   color: #87898E;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 12px;
+  }
+  @media only screen and (min-width: 600px) {
+    font-size: 13px;
+  }
+  @media only screen and (min-width: 900px) {
+    font-size: 18px;
+  }
 `;
 
 export const Input = styled.input`
@@ -102,6 +122,11 @@ export const Button = styled.button`
 
   &:hover {
     opacity: 1;
+  }
+  
+  &.small {
+    padding: 10px 10px;
+    height: 40px;
   }
 `;
 

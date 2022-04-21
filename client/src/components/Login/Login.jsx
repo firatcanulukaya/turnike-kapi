@@ -11,10 +11,9 @@ import {
     SubTitle,
     Title
 } from "../../assets/styled";
-import {LoginContainer, LoginLogo, LoginTitle} from "./style";
+import {LoginContainer, LoginLogo, LoginTitle, OrButtons} from "./style";
 import {useForm} from "react-hook-form";
 import logo from "../../assets/img/oomlLogo.png";
-import {useEffect} from "react";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -25,10 +24,6 @@ const Login = () => {
         handleSubmit,
         formState: {errors},
     } = useForm();
-
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
 
     const onSubmit = data => {
         dispatch(loginUser(data));
@@ -111,6 +106,16 @@ const Login = () => {
                             <Button>Giriş Yap</Button>
                         </form>
                         <Divider/>
+
+                        <OrButtons>
+                            <Button className="small">
+                                Test Girişi Yap
+                            </Button>
+                            <Button className="small">
+                                Kayıt Ol
+                            </Button>
+                        </OrButtons>
+
                     </LoginContainer>
                 </ColFull>
             </Row>
