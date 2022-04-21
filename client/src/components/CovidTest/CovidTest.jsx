@@ -1,5 +1,4 @@
 import {uploadCovid} from "../../redux/actions/covidAction";
-import {useDispatch} from "react-redux";
 import {
     Button,
     ColFull,
@@ -16,7 +15,6 @@ import {useNavigate} from "react-router-dom";
 import logo from "../../assets/img/oomlLogo.png";
 
 const CovidTest = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const {
