@@ -2,6 +2,7 @@ import {LOGIN_USER} from "../types";
 import axios from "axios";
 import Cookies from "js-cookie";
 import alertify from "alertifyjs";
+import {tokenConfig} from "../../services/tokenConfig";
 
 export const loginUser = (userData) => dispatch => {
     axios.post("http://localhost:3001/api/auth/login", userData)
@@ -33,20 +34,4 @@ export const loginUser = (userData) => dispatch => {
             }
         });
 
-}
-
-export const tokenConfig = () => {
-    const initCookie = Cookies.get("ooml-auth-token");
-
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-        }
-    };
-
-    if (initCookie) {
-        config.headers["x-access-token"] = initCookie;
-    }
-
-    return config;
 }
