@@ -1,5 +1,7 @@
 import {loginUser} from "../../redux/actions/userAction";
 import {useDispatch} from "react-redux";
+import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
 import {
     Button,
     ColFull,
@@ -12,11 +14,11 @@ import {
     Title
 } from "../../assets/styled";
 import {LoginContainer, LoginLogo, LoginTitle, OrButtons} from "./style";
-import {useForm} from "react-hook-form";
 import logo from "../../assets/img/oomlLogo.png";
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -107,7 +109,7 @@ const Login = () => {
                         <Divider/>
 
                         <OrButtons>
-                            <Button className="small">
+                            <Button className="small" onClick={() => navigate('/test-yukle')}>
                                 Test Girişi Yap
                             </Button>
                             <Button className="small">
