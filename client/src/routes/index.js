@@ -1,5 +1,6 @@
 import Login from "../components/Login/Login";
 import CovidTest from "../components/CovidTest/CovidTest";
+import StudentPanel from "../components/StudentPanel";
 
 export const routes = [
     {
@@ -10,6 +11,11 @@ export const routes = [
     {
         path: '/test-yukle',
         component: CovidTest,
+        exact: true,
+    },
+    {
+        path: '/ogrenci',
+        component: StudentPanel,
         exact: true,
     }
 ]
