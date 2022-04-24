@@ -1,46 +1,82 @@
-import Navbar from "./Navbar/Navbar";
+import {useSelector, useDispatch} from "react-redux";
+import {getUserByToken} from "../../redux/actions/userAction";
+import {useNavigate} from "react-router-dom";
+import jsCookie from "js-cookie";
+import Navbar from "../Navbar/Navbar";
+import {
+    InfoButtons,
+    InfoCard,
+    InfoCardBanner,
+    InfoCardContainer, InfoCardContent, InfoCardContentSection, InfoCardFooter, InfoCardFooterSection,
+    InfoCardTop,
+    InfoCardTopLeft, InfoCardTopName,
+    InfoCardTopPhoto, InfoCardUtils
+} from "./style";
+import {useEffect} from "react";
 
 const StudentPanel = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {user} = useSelector(state => state.user);
+    const authToken = jsCookie.get("ooml-auth-token");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (authToken) {
+                await dispatch(getUserByToken());
+            } else {
+                navigate('/')
+            }
+        }
+        fetchData();
+    }, [authToken]);
+
+    const getLogout = () => {
+        jsCookie.remove("ooml-auth-token");
+        navigate('/');
+    };
+
+    if (user === null) return "Yükleniyor...";
     return (
         <>
             <Navbar/>
-            <div className="infoCard">
-                <div className="infoCardBanner"/>
-
-                <div className="infoCardTop">
-                    <div className="infoCardTopLeft">
-                        <InfoCardTopPhoto bgColor="#059669">
-                            <p className="infoCardTopName">F</p>
-                        </InfoCardTopPhoto>
-                        <div className="infoCardUtils">
-                            <p>asdsadasd</p>
-                            <span>age: 123</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="infoCardContent">
-
-                    <div className="infoCardContent-section">
-                        <p>Class:</p>
-                        <a style={{
-                            color: "#011F3B",
-                            cursor: "pointer"
-                        }}>asdasd</a>
-                    </div>
-
-                </div>
-
-                <div className="infoCardFooter">
-                    <div className="infoCardFooterButtons">
-                        <InfoButtons bgColor="#F1F1F1" textcolor="#23262F">Edit</InfoButtons>
-                        <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true}>Delete</InfoButtons>
-                    </div>
-
-                </div>
-
-            </div>
-
+            <InfoCardContainer>
+                <InfoCard>
+                    <InfoCardBanner/>
+                    <InfoCardTop>
+                        <InfoCardTopLeft>
+                            <InfoCardTopPhoto bgColor="#059669">
+                                <InfoCardTopName>F</InfoCardTopName>
+                            </InfoCardTopPhoto>
+                            <InfoCardUtils>
+                                <p>{user?.nameSurname}</p>
+                                <span>Okul Numarası: {user?.studentId}</span>
+                            </InfoCardUtils>
+                        </InfoCardTopLeft>
+                    </InfoCardTop>
+                    <InfoCardContent>
+                        <InfoCardContentSection>
+                            <p>Sınıf:</p>
+                            <p style={{color: "black"}}>{user?.className} {user?.department}</p>
+                        </InfoCardContentSection>
+                        <InfoCardContentSection>
+                            <p>Test Durumu:</p>
+                            <a href={`https://covid-19.gov.ct.tr/QRdogrula/${user?.covidTest[0]?.barcode}/${user?.idCard}`}
+                               target="_blank">Sonuç: {user?.covidTest[0]?.testResult ? "POZİTİF" : "NEGATİF"},
+                                Barkod: {user?.covidTest[0]?.barcode}, Yüklenme
+                                Tarihi: {new Date(user?.covidTest[0].createdAt).toLocaleDateString("tr-TR")}</a>
+                        </InfoCardContentSection>
+                    </InfoCardContent>
+                    <InfoCardFooter>
+                        <InfoCardFooterSection>
+                            <InfoButtons bgColor="#F1F1F1" textcolor="#23262F" onClick={() => navigate("/test-yukle")}>Test
+                                Yükle</InfoButtons>
+                            <InfoButtons bgColor="#E53535" textColor="#FCFCFD" isHover={true} onClick={getLogout}>Çıkış
+                                Yap</InfoButtons>
+                        </InfoCardFooterSection>
+                    </InfoCardFooter>
+                </InfoCard>
+            </InfoCardContainer>
         </>
     )
 }
