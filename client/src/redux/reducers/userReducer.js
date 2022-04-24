@@ -1,7 +1,7 @@
 import {LOGIN_USER} from "../types";
 
 const initialState = {
-    user: {}
+    user: null
 }
 
 export default (state = initialState, action) => {
