@@ -47,7 +47,7 @@ const getAllStudents = async (req, res) => {
                 model: db.CovidTest,
                 as: "covidTest",
                 attributes: {
-                    exclude: ["createdAt", "updatedAt", "userId"]
+                    exclude: ["userId"]
                 }
             }]
         });
@@ -72,7 +72,7 @@ const getStudentById = async (req, res) => {
                     model: db.CovidTest,
                     as: "covidTest",
                     attributes: {
-                        exclude: ["createdAt", "updatedAt", "userId"]
+                        exclude: ["userId"]
                     }
                 }]
             });
@@ -183,7 +183,7 @@ const getStudentByJWTToken = async (req, res) => {
                 model: db.CovidTest,
                 as: "covidTest",
                 attributes: {
-                    exclude: ["updatedAt", "userId"]
+                    exclude: ["userId"]
                 }
             }]
         });
