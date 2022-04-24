@@ -1,6 +1,6 @@
 import Login from "../components/Login/Login";
 import CovidTest from "../components/CovidTest/CovidTest";
-import StudentPanel from "../components/StudentPanel";
+import StudentPanel from "../components/StudentPanel/StudentPanel";
 
 export const routes = [
     {
