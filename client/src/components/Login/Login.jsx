@@ -72,6 +72,11 @@ const Login = () => {
                                            maxLength: {
                                                value: 11,
                                                message: "Lütfen en fazla 11 karakter giriniz."
+                                           },
+                                           validate: value => {
+                                               if(Number(value) < 0) {
+                                                   return "Lütfen geçerli bir değer giriniz.";
+                                               }
                                            }
                                        })}/>
                                 {errors.idCard && (
