@@ -33,5 +33,17 @@ export const loginUser = (userData) => dispatch => {
                     break;
             }
         });
+}
 
+export const getUserByToken = () => dispatch => {
+    axios.get("http://localhost:3001/api/student/getByJWTToken", tokenConfig())
+        .then(res => {
+            dispatch({
+                type: LOGIN_USER,
+                payload: res.data.message
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
