@@ -183,7 +183,7 @@ const getStudentByJWTToken = async (req, res) => {
                 model: db.CovidTest,
                 as: "covidTest",
                 attributes: {
-                    exclude: ["createdAt", "updatedAt", "userId"]
+                    exclude: ["updatedAt", "userId"]
                 }
             }]
         });
