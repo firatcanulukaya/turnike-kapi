@@ -89,6 +89,7 @@ const Login = () => {
                             <Label>
                                 <Input placeholder="Şifrenizi giriniz"
                                        className={errors.password ? "error" : ""}
+                                       type="password"
                                        {...register("password", {
                                            required: "Lütfen gerekli yerleri doldurunuz.",
                                            minLength: {
