@@ -94,6 +94,7 @@ const CovidTest = () => {
                             </FormControl>
                             <Stack spacing={10}>
                                 <Button
+                                    type="submit"
                                     bg={'blue.400'}
                                     color={'white'}
                                     _hover={{

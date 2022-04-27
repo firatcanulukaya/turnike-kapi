@@ -269,14 +269,13 @@ const Register = () => {
 
                             <Stack spacing={10} pt={2}>
                                 <Button
-                                    loadingText="Submitting"
                                     size="lg"
                                     bg={'blue.400'}
                                     color={'white'}
                                     _hover={{
                                         bg: 'blue.500',
                                     }}
-                                    type={'submit'}>
+                                    type="submit">
                                     Kayıt Ol
                                 </Button>
                             </Stack>

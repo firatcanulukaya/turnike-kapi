@@ -106,7 +106,7 @@ const Login = () => {
                                 )}
                             </FormControl>
                             <Stack spacing={10}>
-                                <Button
+                                <Button type="submit"
                                     bg={'blue.400'}
                                     color={'white'}
                                     _hover={{
