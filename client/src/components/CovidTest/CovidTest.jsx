@@ -1,18 +1,11 @@
 import {uploadCovid} from "../../redux/actions/covidAction";
 import {
     Button,
-    ColFull,
-    Container,
-    Divider,
     FormError,
-    Input, Label,
-    Row,
-    Title
+    Input
 } from "../../assets/styled";
-import {LoginContainer, LoginLogo, LoginTitle, OrButtons} from "../Login/style";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-import logo from "../../assets/img/oomlLogo.png";
 import {Box, Flex, FormControl, FormLabel, Heading, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 
 const CovidTest = () => {

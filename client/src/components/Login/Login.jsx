@@ -4,24 +4,15 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import {
     Button,
-    ColFull,
-    Container,
-    Divider,
     FormError,
-    Input, Label,
-    Row,
-    SubTitle,
-    Title
+    Input
 } from "../../assets/styled";
 import {
     Box,
-    Checkbox,
     Flex,
     FormControl,
     FormLabel,
     Heading,
-    Link,
-    Spacer,
     Stack,
     Text,
     useColorModeValue
