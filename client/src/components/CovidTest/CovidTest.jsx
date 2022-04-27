@@ -13,6 +13,7 @@ import {LoginContainer, LoginLogo, LoginTitle, OrButtons} from "../Login/style";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import logo from "../../assets/img/oomlLogo.png";
+import {Box, Flex, FormControl, FormLabel, Heading, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 
 const CovidTest = () => {
     const navigate = useNavigate();
@@ -28,32 +29,28 @@ const CovidTest = () => {
     };
 
     return (
-        <Container>
-            <Row>
-                <ColFull center>
-                    <LoginLogo src={logo}/>
-                </ColFull>
-            </Row>
-            <Row>
-                <ColFull center>
-                    <Title>
-                        Osman Örek Meslek Lisesi Kapısına Hoşgeldiniz.
-                    </Title>
-                </ColFull>
-            </Row>
-
-            <Row style={{marginTop: "2rem"}}>
-                <ColFull center>
-                    <LoginTitle>
+        <Flex
+            minH={'100vh'}
+            align={'center'}
+            justify={'center'}
+            bg={useColorModeValue('gray.50', 'gray.800')}>
+            <Stack spacing={8} mx={'auto'} maxW={'3xl'} py={12} px={6}>
+                <Stack align={'center'}>
+                    <Heading fontSize={'3xl'}>Osman Örek Meslek Lisesi Kapısına Hoşgeldiniz</Heading>
+                    <Text fontSize={'lg'} color={'gray.600'}>
                         Test Sonucu Yükle
-                    </LoginTitle>
-                </ColFull>
-
-                <ColFull center>
-                    <LoginContainer>
-                        <form onSubmit={handleSubmit(onSubmit)} style={{width: "100%"}}>
-                            <Label>
-                                <Input placeholder="Kimlik numaranızı giriniz" type="number"
+                    </Text>
+                </Stack>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Box
+                        rounded={'lg'}
+                        bg={useColorModeValue('white', 'gray.700')}
+                        boxShadow={'lg'}
+                        p={8}>
+                        <Stack spacing={4}>
+                            <FormControl id="email">
+                                <FormLabel>Kimlik Numarası</FormLabel>
+                                <Input placeholder="Kimlik Numaranızı giriniz" type="number"
                                        className={errors.idCard ? "error" : ""}
                                        {...register("idCard", {
                                            required: "Lütfen gerekli yerleri doldurunuz.",
@@ -64,16 +61,22 @@ const CovidTest = () => {
                                            maxLength: {
                                                value: 11,
                                                message: "Lütfen en fazla 11 karakter giriniz."
+                                           },
+                                           validate: value => {
+                                               if (Number(value) < 0) {
+                                                   return "Lütfen geçerli bir değer giriniz.";
+                                               }
                                            }
                                        })}/>
+
                                 {errors.idCard && (
                                     <FormError>
                                         <p><i className="fa-solid fa-circle-exclamation"/> {errors.idCard?.message}</p>
                                     </FormError>
                                 )}
-                            </Label>
-
-                            <Label>
+                            </FormControl>
+                            <FormControl id="password">
+                                <FormLabel>Barkod</FormLabel>
                                 <Input placeholder="Barkod numaranızı giriniz"
                                        className={errors.barcode ? "error" : ""}
                                        {...register("barcode", {
@@ -89,31 +92,39 @@ const CovidTest = () => {
                                        })}
                                 />
 
+
                                 {errors.barcode && (
                                     <FormError>
                                         <p><i className="fa-solid fa-circle-exclamation"/> {errors.barcode?.message}
                                         </p>
                                     </FormError>
                                 )}
-                            </Label>
-                            <Button>Yükle</Button>
-                        </form>
-                        <Divider/>
+                            </FormControl>
+                            <Stack spacing={10}>
+                                <Button
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}>
+                                    Yükle
+                                </Button>
+                            </Stack>
 
-                        <OrButtons>
-                            <Button className="small" onClick={() => navigate('/')}>
-                                Girişi Yap
-                            </Button>
-                            <Button className="small">
-                                Kayıt Ol
-                            </Button>
-                        </OrButtons>
+                            <Flex>
+                                <Button className="small" onClick={() => navigate('/')}>
+                                    Giriş Yap
+                                </Button>
+                                <Button className="small">
+                                    Kayıt Ol
+                                </Button>
+                            </Flex>
 
-                    </LoginContainer>
-                </ColFull>
-            </Row>
-
-        </Container>
+                        </Stack>
+                    </Box>
+                </form>
+            </Stack>
+        </Flex>
     )
 }
 

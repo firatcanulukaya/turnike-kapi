@@ -13,8 +13,19 @@ import {
     SubTitle,
     Title
 } from "../../assets/styled";
-import {LoginContainer, LoginLogo, LoginTitle, OrButtons} from "./style";
-import logo from "../../assets/img/oomlLogo.png";
+import {
+    Box,
+    Checkbox,
+    Flex,
+    FormControl,
+    FormLabel,
+    Heading,
+    Link,
+    Spacer,
+    Stack,
+    Text,
+    useColorModeValue
+} from "@chakra-ui/react";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -31,36 +42,27 @@ const Login = () => {
     };
 
     return (
-        <Container>
-            <Row>
-                <ColFull center>
-                    <LoginLogo src={logo}/>
-                </ColFull>
-            </Row>
-            <Row>
-                <ColFull center>
-                    <Title>
-                        Osman Örek Meslek Lisesi Kapısına Hoşgeldiniz.
-                    </Title>
-                </ColFull>
-            </Row>
-
-            <Row style={{marginTop: "2rem"}}>
-                <ColFull center>
-                    <LoginTitle>
-                        Giriş Yap
-                    </LoginTitle>
-                </ColFull>
-                <ColFull center>
-                    <SubTitle>
-                        İşleme devam edebilmek için lütfen giriş yapınız.
-                    </SubTitle>
-                </ColFull>
-
-                <ColFull center>
-                    <LoginContainer>
-                        <form onSubmit={handleSubmit(onSubmit)} style={{width: "100%"}}>
-                            <Label>
+        <Flex
+            minH={'100vh'}
+            align={'center'}
+            justify={'center'}
+            bg={useColorModeValue('gray.50', 'gray.800')}>
+            <Stack spacing={8} mx={'auto'} maxW={'3xl'} py={12} px={6}>
+                <Stack align={'center'}>
+                    <Heading fontSize={'3xl'}>Osman Örek Meslek Lisesi Kapısına Hoşgeldiniz</Heading>
+                    <Text fontSize={'lg'} color={'gray.600'}>
+                        İşleme devam edebilmek için giriş yapınız.
+                    </Text>
+                </Stack>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Box
+                        rounded={'lg'}
+                        bg={useColorModeValue('white', 'gray.700')}
+                        boxShadow={'lg'}
+                        p={8}>
+                        <Stack spacing={4}>
+                            <FormControl id="email">
+                                <FormLabel>Kimlik Numarası</FormLabel>
                                 <Input placeholder="Kimlik Numaranızı giriniz" type="number"
                                        className={errors.idCard ? "error" : ""}
                                        {...register("idCard", {
@@ -74,19 +76,20 @@ const Login = () => {
                                                message: "Lütfen en fazla 11 karakter giriniz."
                                            },
                                            validate: value => {
-                                               if(Number(value) < 0) {
+                                               if (Number(value) < 0) {
                                                    return "Lütfen geçerli bir değer giriniz.";
                                                }
                                            }
                                        })}/>
+
                                 {errors.idCard && (
                                     <FormError>
                                         <p><i className="fa-solid fa-circle-exclamation"/> {errors.idCard?.message}</p>
                                     </FormError>
                                 )}
-                            </Label>
-
-                            <Label>
+                            </FormControl>
+                            <FormControl id="password">
+                                <FormLabel>Şifre</FormLabel>
                                 <Input placeholder="Şifrenizi giriniz"
                                        className={errors.password ? "error" : ""}
                                        type="password"
@@ -103,31 +106,39 @@ const Login = () => {
                                        })}
                                 />
 
+
                                 {errors.password && (
                                     <FormError>
                                         <p><i className="fa-solid fa-circle-exclamation"/> {errors.password?.message}
                                         </p>
                                     </FormError>
                                 )}
-                            </Label>
-                            <Button>Giriş Yap</Button>
-                        </form>
-                        <Divider/>
+                            </FormControl>
+                            <Stack spacing={10}>
+                                <Button
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}>
+                                    Giriş Yap
+                                </Button>
+                            </Stack>
 
-                        <OrButtons>
-                            <Button className="small" onClick={() => navigate('/test-yukle')}>
-                                Test Girişi Yap
-                            </Button>
-                            <Button className="small">
-                                Kayıt Ol
-                            </Button>
-                        </OrButtons>
+                            <Flex>
+                                <Button className="small" onClick={() => navigate('/test-yukle')}>
+                                    Test Girişi Yap
+                                </Button>
+                                <Button className="small">
+                                    Kayıt Ol
+                                </Button>
+                            </Flex>
 
-                    </LoginContainer>
-                </ColFull>
-            </Row>
-
-        </Container>
+                        </Stack>
+                    </Box>
+                </form>
+            </Stack>
+        </Flex>
     )
 }
 
