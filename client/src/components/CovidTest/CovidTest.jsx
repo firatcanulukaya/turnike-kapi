@@ -1,12 +1,11 @@
 import {uploadCovid} from "../../redux/actions/covidAction";
 import {
-    Button,
     FormError,
     Input
 } from "../../assets/styled";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-import {Box, Flex, FormControl, FormLabel, Heading, Stack, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Flex, FormControl, Button, FormLabel, Heading, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 
 const CovidTest = () => {
     const navigate = useNavigate();
@@ -104,11 +103,20 @@ const CovidTest = () => {
                                 </Button>
                             </Stack>
 
-                            <Flex>
-                                <Button className="small" onClick={() => navigate('/')}>
+                            <Flex align={'center'}
+                                  justify={'space-evenly'}>
+                                <Button bg={'blue.400'}
+                                        color={'white'}
+                                        _hover={{
+                                            bg: 'blue.500',
+                                        }} onClick={() => navigate('/')}>
                                     Giriş Yap
                                 </Button>
-                                <Button className="small" onClick={() => navigate('/kayit')}>
+                                <Button bg={'blue.400'}
+                                        color={'white'}
+                                        _hover={{
+                                            bg: 'blue.500',
+                                        }} onClick={() => navigate('/kayit')}>
                                     Kayıt Ol
                                 </Button>
                             </Flex>

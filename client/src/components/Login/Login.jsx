@@ -3,7 +3,6 @@ import {useDispatch} from "react-redux";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import {
-    Button,
     FormError,
     Input
 } from "../../assets/styled";
@@ -13,6 +12,7 @@ import {
     FormControl,
     FormLabel,
     Heading,
+    Button,
     Stack,
     Text,
     useColorModeValue
@@ -116,11 +116,20 @@ const Login = () => {
                                 </Button>
                             </Stack>
 
-                            <Flex>
-                                <Button className="small" onClick={() => navigate('/test-yukle')}>
+                            <Flex align={'center'}
+                                  justify={'space-evenly'}>
+                                <Button bg={'blue.400'}
+                                        color={'white'}
+                                        _hover={{
+                                            bg: 'blue.500',
+                                        }} onClick={() => navigate('/test-yukle')}>
                                     Test Girişi Yap
                                 </Button>
-                                <Button className="small" onClick={() => navigate('/kayit')}>
+                                <Button bg={'blue.400'}
+                                        color={'white'}
+                                        _hover={{
+                                            bg: 'blue.500',
+                                        }} onClick={() => navigate('/kayit')}>
                                     Kayıt Ol
                                 </Button>
                             </Flex>
