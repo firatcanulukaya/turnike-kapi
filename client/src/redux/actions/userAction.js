@@ -53,3 +53,22 @@ export const getUserByToken = () => dispatch => {
             console.log(err);
         });
 }
+
+export const registerUser = data => dispatch => {
+    axios.post("http://localhost:3001/api/auth/register", data)
+        .then(() => {
+            alertify.success("Kayıt başarılı");
+        })
+        .catch(err => {
+            switch (err.response.data.message) {
+                case "STUDENT_ALREADY_EXISTS":
+                    alertify.error("Öğrenci zaten mevcut");
+                    break;
+                default:
+                    alertify.error("Bir hata oluştu");
+                    console.log(err.response.data);
+                    break;
+            }
+        });
+
+}
