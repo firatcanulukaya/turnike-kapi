@@ -120,7 +120,7 @@ const Login = () => {
                                 <Button className="small" onClick={() => navigate('/test-yukle')}>
                                     Test Girişi Yap
                                 </Button>
-                                <Button className="small">
+                                <Button className="small" onClick={() => navigate('/kayit')}>
                                     Kayıt Ol
                                 </Button>
                             </Flex>

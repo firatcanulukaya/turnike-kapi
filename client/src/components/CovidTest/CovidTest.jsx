@@ -108,7 +108,7 @@ const CovidTest = () => {
                                 <Button className="small" onClick={() => navigate('/')}>
                                     Giriş Yap
                                 </Button>
-                                <Button className="small">
+                                <Button className="small" onClick={() => navigate('/kayit')}>
                                     Kayıt Ol
                                 </Button>
                             </Flex>
