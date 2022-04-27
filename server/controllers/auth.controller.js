@@ -45,11 +45,6 @@ const register = async (req, res) => {
             throw new Error("STUDENT_ALREADY_EXISTS");
         }
 
-        let getRfid = await db.Student.findOne({where: {rfid}});
-        if (getRfid) {
-            throw new Error("RFID_ALREADY_EXISTS");
-        }
-
         const hashedPassword = await bcrypt.hash(password, 10);
         const student = await db.Student.create({
             nameSurname,
@@ -63,7 +58,7 @@ const register = async (req, res) => {
             testResult
         });
 
-        return MessageService(res, student);
+        return MessageService(res, "STUDENT_CREATED");
     } catch (error) {
         return ErrorService(res, error);
     }
