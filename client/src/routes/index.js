@@ -3,6 +3,7 @@ import CovidTest from "../components/CovidTest/CovidTest";
 import StudentPanel from "../components/StudentPanel/StudentPanel";
 import Register from "../components/Register/Register";
 import NotFound from "../components/NotFound/NotFound";
+import TeacherPanel from "../components/TeacherPanel/TeacherPanel";
 
 export const routes = [
     {
@@ -23,6 +24,11 @@ export const routes = [
     {
         path: '/ogrenci',
         component: StudentPanel,
+        exact: true,
+    },
+    {
+        path: '/ogretmen',
+        component: TeacherPanel,
         exact: true,
     },
     {
