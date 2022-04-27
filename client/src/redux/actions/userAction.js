@@ -58,6 +58,7 @@ export const registerUser = data => dispatch => {
     axios.post("http://localhost:3001/api/auth/register", data)
         .then(() => {
             alertify.success("Kayıt başarılı");
+            window.location.href = "/";
         })
         .catch(err => {
             switch (err.response.data.message) {
