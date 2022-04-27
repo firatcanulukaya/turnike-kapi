@@ -61,10 +61,15 @@ const StudentPanel = () => {
                         </InfoCardContentSection>
                         <InfoCardContentSection>
                             <p>Test Durumu:</p>
-                            <a href={`https://covid-19.gov.ct.tr/QRdogrula/${user?.covidTest[0]?.barcode}/${user?.idCard}`}
-                               target="_blank">Sonuç: {user?.covidTest[0]?.testResult ? "POZİTİF" : "NEGATİF"},
-                                Barkod: {user?.covidTest[0]?.barcode}, Yüklenme
-                                Tarihi: {new Date(user?.covidTest[0].updatedAt).toLocaleDateString("tr-TR")}</a>
+                            {
+                                user?.covidTest.length > 0 ?
+                                    <a href={`https://covid-19.gov.ct.tr/QRdogrula/${user?.covidTest[0]?.barcode}/${user?.idCard}`}
+                                       target="_blank">Sonuç: {user?.covidTest[0]?.testResult ? "POZİTİF" : "NEGATİF"},
+                                        Barkod: {user?.covidTest[0]?.barcode}, Yüklenme
+                                        Tarihi: {new Date(user?.covidTest[0].updatedAt).toLocaleDateString("tr-TR")}</a>
+                                    :
+                                    <p>Test Yapılmamış</p>
+                            }
                         </InfoCardContentSection>
                     </InfoCardContent>
                     <InfoCardFooter>
