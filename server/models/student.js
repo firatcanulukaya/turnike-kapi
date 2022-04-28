@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'userId',
                 as: 'covidTest'
             });
+
+            Student.hasMany(models.Entries, {
+                foreignKey: 'userId',
+                as: 'entries'
+            });
         }
     }
 
