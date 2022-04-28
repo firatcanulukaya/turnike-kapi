@@ -90,6 +90,7 @@ export const Input = styled.input`
   box-sizing: border-box;
   border-radius: 12px;
   margin-bottom: 10px;
+  color: #000;
 
   &.error {
     border-color: #FF0000;
