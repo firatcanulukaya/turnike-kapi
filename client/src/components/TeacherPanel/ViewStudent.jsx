@@ -1,7 +1,6 @@
 import {useSelector, useDispatch} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import {
-    InfoButtons,
     InfoCard,
     InfoCardBanner,
     InfoCardContainer, InfoCardContent, InfoCardContentSection, InfoCardFooter, InfoCardFooterSection,
@@ -11,6 +10,8 @@ import {
 } from "../StudentPanel/style";
 import {useEffect} from "react";
 import {getStudent} from "../../redux/actions/userAction";
+import { ArrowLeftIcon } from '@chakra-ui/icons'
+import {Icon} from "@chakra-ui/react";
 
 const ViewStudent = () => {
     const {id} = useParams();
@@ -56,6 +57,16 @@ const ViewStudent = () => {
                                 <p>Test Yapılmamış</p>
                         }
                     </InfoCardContentSection>
+
+                    <InfoCardFooter>
+                        <InfoCardFooterSection>
+                            <button onClick={() => navigate(-1)}>
+                                <Icon as={ArrowLeftIcon} color={"blue.800"}/>
+                                <p>Geri Dön</p>
+                            </button>
+                        </InfoCardFooterSection>
+                    </InfoCardFooter>
+
                 </InfoCardContent>
 
             </InfoCard>
