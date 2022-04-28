@@ -2,7 +2,6 @@ import {useSelector, useDispatch} from "react-redux";
 import {getUserByToken} from "../../redux/actions/userAction";
 import {useNavigate} from "react-router-dom";
 import jsCookie from "js-cookie";
-import Navbar from "../Navbar/Navbar";
 import {
     InfoButtons,
     InfoCard,
@@ -38,8 +37,6 @@ const StudentPanel = () => {
 
     if (user === null) return "Yükleniyor...";
     return (
-        <>
-            <Navbar/>
             <InfoCardContainer>
                 <InfoCard>
                     <InfoCardBanner/>
@@ -82,7 +79,6 @@ const StudentPanel = () => {
                     </InfoCardFooter>
                 </InfoCard>
             </InfoCardContainer>
-        </>
     )
 }
 
