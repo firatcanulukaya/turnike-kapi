@@ -27,7 +27,7 @@ export const routes = [
         exact: true,
     },
     {
-        path: '/ogretmen',
+        path: '/ogretmen/*',
         component: TeacherPanel,
         exact: true,
     },
