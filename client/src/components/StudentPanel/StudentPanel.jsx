@@ -43,7 +43,7 @@ const StudentPanel = () => {
                     <InfoCardTop>
                         <InfoCardTopLeft>
                             <InfoCardTopPhoto bgColor="#059669">
-                                <InfoCardTopName>F</InfoCardTopName>
+                                <InfoCardTopName>{user?.nameSurname?.substr(0, 1)}</InfoCardTopName>
                             </InfoCardTopPhoto>
                             <InfoCardUtils>
                                 <p>{user?.nameSurname}</p>
