@@ -41,9 +41,8 @@ const Nav = () => {
                             as={'nav'}
                             spacing={4}
                             display={{base: 'none', md: 'flex'}}>
-                            <NavLink to={"/"}>ads</NavLink>
-                            <NavLink to={"/"}>ads</NavLink>
-                            <NavLink to={"/"}>ads</NavLink>
+                            <NavLink to={"ogrenciler"}>Öğrenci Listesi</NavLink>
+                            <NavLink to={"rfid-ekle"}>RFID Ekle</NavLink>
                         </HStack>
                     </HStack>
 
