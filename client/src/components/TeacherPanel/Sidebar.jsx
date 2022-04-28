@@ -12,9 +12,9 @@ import {
     useColorModeValue,
     Stack,
     useColorMode,
-    Center, BreadcrumbItem, BreadcrumbLink, Breadcrumb, HStack,
+    Center, HStack,
 } from '@chakra-ui/react';
-import {ChevronRightIcon, MoonIcon, SunIcon} from '@chakra-ui/icons';
+import {MoonIcon, SunIcon} from '@chakra-ui/icons';
 import oomlLogo from '../../assets/img/oomlLogo.png';
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
@@ -35,7 +35,6 @@ const Nav = () => {
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <Box><img src={oomlLogo} style={{width: "50px"}}/></Box>
-
 
                     <HStack spacing={8} alignItems={'center'}>
                         <HStack
