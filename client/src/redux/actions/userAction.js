@@ -1,4 +1,4 @@
-import {LOGIN_USER} from "../types";
+import {LOGIN_USER, GET_STUDENT, GET_ALL_STUDENTS} from "../types";
 import axios from "axios";
 import Cookies from "js-cookie";
 import alertify from "alertifyjs";
@@ -71,5 +71,38 @@ export const registerUser = data => dispatch => {
                     break;
             }
         });
+}
 
+export const getAllStudents = () => dispatch => {
+    axios.get("http://localhost:3001/api/student/getAll", tokenConfig())
+        .then(res => {
+            dispatch({
+                type: GET_ALL_STUDENTS,
+                payload: res.data.message.filter(student => student.roleId === 3)
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+export const getStudent = id => dispatch => {
+    axios.get(`http://localhost:3001/api/student/get/${id}`, tokenConfig())
+        .then(res => {
+            dispatch({
+                type: GET_STUDENT,
+                payload: res.data.message
+            });
+        })
+        .catch(err => {
+            switch (err.response.data.message) {
+                case "STUDENT_NOT_FOUND":
+                    alertify.error("Öğrenci bulunamadı");
+                    break;
+                default:
+                    alertify.error("Bir hata oluştu");
+                    console.log(err.response.data);
+                    break;
+            }
+        });
 }
