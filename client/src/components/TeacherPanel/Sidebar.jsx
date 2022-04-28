@@ -1,3 +1,4 @@
+import {useNavigate} from "react-router-dom";
 import {
     Box,
     Flex,
@@ -11,18 +12,43 @@ import {
     useColorModeValue,
     Stack,
     useColorMode,
-    Center, BreadcrumbItem, BreadcrumbLink, Breadcrumb,
+    Center, BreadcrumbItem, BreadcrumbLink, Breadcrumb, HStack,
 } from '@chakra-ui/react';
 import {ChevronRightIcon, MoonIcon, SunIcon} from '@chakra-ui/icons';
 import oomlLogo from '../../assets/img/oomlLogo.png';
+import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import jsCookie from "js-cookie";
 
 const Nav = () => {
     const {colorMode, toggleColorMode} = useColorMode();
+    const navigate = useNavigate();
+    const {user} = useSelector(state => state.user);
+
+    const getLogout = () => {
+        jsCookie.remove("ooml-auth-token");
+        navigate('/');
+    };
+
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <Box><img src={oomlLogo} style={{width: "50px"}}/></Box>
+
+
+                    <HStack spacing={8} alignItems={'center'}>
+                        <HStack
+                            as={'nav'}
+                            spacing={4}
+                            display={{base: 'none', md: 'flex'}}>
+                            <NavLink to={"/"}>ads</NavLink>
+                            <NavLink to={"/"}>ads</NavLink>
+                            <NavLink to={"/"}>ads</NavLink>
+                        </HStack>
+                    </HStack>
+
+
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7}>
                             <Button onClick={toggleColorMode}>
@@ -38,7 +64,7 @@ const Nav = () => {
                                     minW={0}>
                                     <Avatar
                                         size={'sm'}
-                                        src={'https://avatars.dicebear.com/api/male/username.svg'}
+                                        src={'https://sade.network/assets/img/user.png'}
                                     />
                                 </MenuButton>
                                 <MenuList alignItems={'center'}>
@@ -46,42 +72,22 @@ const Nav = () => {
                                     <Center>
                                         <Avatar
                                             size={'2xl'}
-                                            src={'https://avatars.dicebear.com/api/male/username.svg'}
+                                            src={'https://sade.network/assets/img/user.png'}
                                         />
                                     </Center>
                                     <br/>
                                     <Center>
-                                        <p>Username</p>
+                                        <p>{user?.nameSurname}</p>
                                     </Center>
                                     <br/>
                                     <MenuDivider/>
-                                    <MenuItem>Your Servers</MenuItem>
-                                    <MenuItem>Account Settings</MenuItem>
-                                    <MenuItem>Logout</MenuItem>
+                                    <MenuItem onClick={() => navigate('profil')}>Profil</MenuItem>
+                                    <MenuItem onClick={getLogout}>Çıkış Yap</MenuItem>
                                 </MenuList>
                             </Menu>
                         </Stack>
                     </Flex>
-                </Flex>
-            </Box>
 
-            <Box bg={useColorModeValue('gray.200', 'gray.700')}>
-                <Flex>
-                    <Stack padding="5px 20px">
-                        <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500'/>}>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href='#'>Home</BreadcrumbLink>
-                            </BreadcrumbItem>
-
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href='#'>About</BreadcrumbLink>
-                            </BreadcrumbItem>
-
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
-                            </BreadcrumbItem>
-                        </Breadcrumb>
-                    </Stack>
                 </Flex>
             </Box>
 
