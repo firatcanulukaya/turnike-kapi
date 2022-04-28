@@ -8,7 +8,7 @@ export const InfoCardContainer = styled.div`
 `;
 
 export const InfoCard = styled.div`
-  background: #fff;
+  background: #fcfcfc;
   border-radius: 12px;
   width: 60%;
   position: relative;
