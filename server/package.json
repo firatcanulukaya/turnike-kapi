@@ -18,7 +18,9 @@
     "sequelize-cli": "^6.3.0"
   },
   "scripts": {
-    "start": "npx nodemon index.js"
+    "start": "npx nodemon index.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo:all"
   },
   "author": "Fıratcan Ulukaya",
   "license": "ISC"
