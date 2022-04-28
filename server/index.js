@@ -3,8 +3,8 @@ const {json} = require("body-parser");
 const cors = require("cors");
 const app = express();
 
-app.use(json())
-app.use(cors())
+app.use(cors());
+app.use(json());
 
 app.use(function (req, res, next) {
     res.setHeader("X-Powered-By", "12-BT IT TEAM V1.0.0 - 2022");
