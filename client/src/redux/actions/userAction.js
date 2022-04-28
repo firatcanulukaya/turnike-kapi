@@ -15,7 +15,7 @@ export const loginUser = (userData) => dispatch => {
                         payload: res.data.message
                     });
 
-                    if (res.data.message.roleId === 2) {
+                    if (res.data.message.roleId === 2 || res.data.message.roleId === 1) {
                         window.location.href = "/ogretmen";
                     } else {
                         window.location.href = "/ogrenci";
