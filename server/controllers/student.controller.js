@@ -49,7 +49,14 @@ const getAllStudents = async (req, res) => {
                 attributes: {
                     exclude: ["userId"]
                 }
-            }]
+            },
+                {
+                    model: db.Entries,
+                    as: "entries",
+                    attributes: {
+                        exclude: ["userId"]
+                    }
+                }]
         });
 
         return MessageService(res, students);
@@ -74,7 +81,14 @@ const getStudentById = async (req, res) => {
                     attributes: {
                         exclude: ["userId"]
                     }
-                }]
+                },
+                    {
+                        model: db.Entries,
+                        as: "entries",
+                        attributes: {
+                            exclude: ["userId"]
+                        }
+                    }]
             });
 
         if (!student) {
@@ -185,7 +199,14 @@ const getStudentByJWTToken = async (req, res) => {
                 attributes: {
                     exclude: ["userId"]
                 }
-            }]
+            },
+                {
+                    model: db.Entries,
+                    as: "entries",
+                    attributes: {
+                        exclude: ["userId"]
+                    }
+                }]
         });
 
         return MessageService(res, student);

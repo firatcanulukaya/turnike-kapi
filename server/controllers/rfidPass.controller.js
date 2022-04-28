@@ -24,6 +24,18 @@ const rfidPass = async (req, res) => {
             throw new Error("STUDENT_NOT_FOUND");
         }
 
+        const checkIn = await db.Entries.findOne({
+            where: {
+                userId: student.id,
+            }
+        });
+
+        const jsonedCheckIn = checkIn?.toJSON();
+
+        if(jsonedCheckIn?.direction === "GİRİŞ") {
+            throw new Error("STUDENT_ALREADY_IN");
+        }
+
         const covid = await db.CovidTest.findOne({
             where: {
                 userId: student.id
@@ -53,12 +65,64 @@ const rfidPass = async (req, res) => {
             throw new Error("COVID_TEST_POSITIVE");
         }
 
+        await db.Entries.create({
+            userId: student.id,
+            direction: "GİRİŞ"
+        })
+
         MessageService(res, true);
     } catch (error) {
         return ErrorService(res, error);
     }
 }
 
+const getOut = async (req, res) => {
+    try {
+        const {rfid} = req.params;
+        const student = await db.Student.findOne({
+            where: {
+                rfid
+            },
+            attributes: {
+                exclude: ["password"]
+            },
+            include: [{
+                model: db.CovidTest,
+                as: "covidTest",
+                attributes: ["testDate"],
+            }]
+        });
+
+        if (!student) {
+            throw new Error("STUDENT_NOT_FOUND");
+        }
+
+        const checkIn = await db.Entries.findOne({
+            where: {
+                userId: student.id,
+            }
+        });
+
+        const jsonedCheckIn = checkIn?.toJSON();
+        console.log(jsonedCheckIn);
+
+        if(jsonedCheckIn?.direction === "ÇIKIŞ") {
+            throw new Error("STUDENT_NOT_IN");
+        }
+
+        await db.Entries.create({
+            userId: student.id,
+            direction: "ÇIKIŞ"
+        })
+
+        MessageService(res, true);
+
+    } catch (error) {
+        return ErrorService(res, error);
+    }
+}
+
 module.exports = {
-    rfidPass
+    rfidPass,
+    getOut
 };
