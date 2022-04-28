@@ -25,14 +25,14 @@ const rfidPass = async (req, res) => {
         }
 
         const checkIn = await db.Entries.findOne({
+            order: [["createdAt", "DESC"]],
             where: {
                 userId: student.id,
             }
         });
 
         const jsonedCheckIn = checkIn?.toJSON();
-
-        if(jsonedCheckIn?.direction === "GİRİŞ") {
+        if (jsonedCheckIn?.direction === "GİRİŞ") {
             throw new Error("STUDENT_ALREADY_IN");
         }
 
@@ -98,16 +98,15 @@ const getOut = async (req, res) => {
         }
 
         const checkIn = await db.Entries.findOne({
+            order: [["createdAt", "DESC"]],
             where: {
                 userId: student.id,
             }
         });
 
         const jsonedCheckIn = checkIn?.toJSON();
-        console.log(jsonedCheckIn);
-
-        if(jsonedCheckIn?.direction === "ÇIKIŞ") {
-            throw new Error("STUDENT_NOT_IN");
+        if (jsonedCheckIn?.direction === "ÇIKIŞ" || !jsonedCheckIn?.direction) {
+            throw new Error("STUDENT_ALREADY_OUT");
         }
 
         await db.Entries.create({
