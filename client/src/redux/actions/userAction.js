@@ -106,3 +106,61 @@ export const getStudent = id => dispatch => {
             }
         });
 }
+
+export const deleteStudent = id => dispatch => {
+    axios.delete(`http://localhost:3001/api/student/delete/${id}`, tokenConfig())
+        .then(() => {
+            alertify.success("Öğrenci silindi");
+            axios.get("http://localhost:3001/api/student/getAll", tokenConfig())
+                .then(res => {
+                    dispatch({
+                        type: GET_ALL_STUDENTS,
+                        payload: res.data.message.filter(student => student.roleId === 3)
+                    });
+                })
+                .catch(err => {
+                    alertify.error("Bir hata oluştu");
+                    console.log(err);
+                });
+        })
+        .catch(err => {
+            switch (err.response.data.message) {
+                case "STUDENT_NOT_FOUND":
+                    alertify.error("Öğrenci bulunamadı");
+                    break;
+                default:
+                    alertify.error("Bir hata oluştu");
+                    console.log(err.response.data);
+                    break;
+            }
+        });
+}
+
+export const editStudent = data => dispatch => {
+    axios.patch(`http://localhost:3001/api/student/update/${data.id}`, data, tokenConfig())
+        .then(() => {
+            alertify.success("Öğrenci güncellendi");
+            axios.get("http://localhost:3001/api/student/getAll", tokenConfig())
+                .then(res => {
+                    dispatch({
+                        type: GET_ALL_STUDENTS,
+                        payload: res.data.message.filter(student => student.roleId === 3)
+                    });
+                })
+                .catch(err => {
+                    alertify.error("Bir hata oluştu");
+                    console.log(err);
+                });
+        })
+        .catch(err => {
+            switch (err.response.data.message) {
+                case "STUDENT_NOT_FOUND":
+                    alertify.error("Öğrenci bulunamadı");
+                    break;
+                default:
+                    alertify.error("Bir hata oluştu");
+                    console.log(err.response.data);
+                    break;
+            }
+        });
+}
