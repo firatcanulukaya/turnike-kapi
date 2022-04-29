@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getUserByToken} from "../../redux/actions/userAction";
 import jsCookie from "js-cookie";
 import Sidebar from './Sidebar';
-import StudentPanel from "../StudentPanel/StudentPanel";
+import Profile from "./Profile";
 import Students from "./Students";
 import ViewStudent from "./ViewStudent";
 import EditRFID from "./EditRFID";
@@ -31,7 +31,7 @@ const TeacherPanel = () => {
         <>
             <Sidebar/>
             <Routes>
-                <Route path="/profil" element={<StudentPanel/>}/>
+                <Route path="/profil" element={<Profile/>}/>
                 <Route path="/ogrenciler" element={<Students/>}/>
                 <Route path="/rfid-ekle" element={<EditRFID/>}/>
                 <Route path="/ogrenci/:id" element={<ViewStudent/>}/>
