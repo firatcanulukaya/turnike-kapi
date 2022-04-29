@@ -5,6 +5,21 @@ export const InfoCardContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 5rem;
+
+  @media only screen and (min-width: 992px) {
+    width: 100%;
+    margin: 40px 0;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    margin: 0;
+  }
+
+  @media only screen and (min-width: 600px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 export const InfoCard = styled.div`
@@ -12,6 +27,19 @@ export const InfoCard = styled.div`
   border-radius: 12px;
   width: 60%;
   position: relative;
+
+
+  @media only screen and (min-width: 992px) {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 90%;
+  }
+
+  @media only screen and (min-width: 600px) {
+    width: 90%;
+  }
 `;
 
 export const InfoCardTop = styled.div`
@@ -77,6 +105,7 @@ export const InfoCardBanner = styled.div`
 export const InfoCardFooterSection = styled.div`
   display: flex;
   align-items: center;
+  width: 50%;
 
   button {
     display: flex;
@@ -87,14 +116,30 @@ export const InfoCardFooterSection = styled.div`
       color: #3772FF;
       margin: 0 10px;
     }
-  }
+  };
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  };
+
+  @media (min-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  };
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+    gap: 0;
+  };
+  
 `;
 
 export const InfoButtons = styled.button`
   display: flex;
   justify-content: center;
   padding: 16px 0px;
-  width: 232px;
+  width: 100%;
   background: ${p => p.bgColor};
   border-radius: 50px;
   font-family: "Plus Jakarta Sans Medium", sans-serif;
@@ -113,7 +158,11 @@ export const InfoButtons = styled.button`
     border: 1px solid ${p.bgColor};
   }`
     }
-  }}`;
+  }};
+
+
+
+`;
 
 export const InfoCardTopPhoto = styled.div`
   position: absolute;
