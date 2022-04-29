@@ -11,7 +11,7 @@ import {
     Th,
     Tfoot, TableCaption, TableContainer
 } from "@chakra-ui/react";
-import {ExternalLinkIcon, DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {ExternalLinkIcon, DeleteIcon} from "@chakra-ui/icons";
 import {getAllStudents, deleteStudent} from "../../redux/actions/userAction";
 import {useDispatch, useSelector} from "react-redux";
 

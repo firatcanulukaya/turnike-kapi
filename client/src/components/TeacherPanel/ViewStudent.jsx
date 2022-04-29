@@ -12,9 +12,7 @@ import React, {useEffect} from "react";
 import {getStudent} from "../../redux/actions/userAction";
 import {ArrowLeftIcon, DeleteIcon, ExternalLinkIcon} from '@chakra-ui/icons'
 import {
-    ButtonGroup, Flex,
     Icon,
-    IconButton,
     Table,
     TableCaption,
     TableContainer,

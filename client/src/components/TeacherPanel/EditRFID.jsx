@@ -12,7 +12,6 @@ import {
     Heading,
     Button,
     Stack,
-    Text,
     useColorModeValue, Select
 } from "@chakra-ui/react";
 import {useEffect} from "react";
