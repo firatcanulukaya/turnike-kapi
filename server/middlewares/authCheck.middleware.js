@@ -10,7 +10,7 @@ const authCheck = (req, res, next) => {
         });
     }
     try {
-        const decoded = jwt.verify(token, "ooml", {
+        const decoded = jwt.verify(token, "GENERATE_CODE", {
             algorithms: ["HS256"],
         });
         req.user = decoded;

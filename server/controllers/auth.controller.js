@@ -28,7 +28,7 @@ const login = async (req, res) => {
                 roleId: user.roleId,
                 rfid: user.rfid,
             },
-            "ooml",
+            "GENERATE_CODE",
             {expiresIn: "24h"});
         return MessageService(res, token);
     } catch (error) {
