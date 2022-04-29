@@ -5,8 +5,8 @@ import {getUserByToken} from "../../redux/actions/userAction";
 import jsCookie from "js-cookie";
 import Sidebar from './Sidebar';
 import Profile from "./Profile";
-import Students from "./Students";
-import ViewStudent from "./ViewStudent";
+import Students from "./Student/Students";
+import ViewStudent from "./Student/ViewStudent";
 import EditRFID from "./EditRFID";
 
 const TeacherPanel = () => {

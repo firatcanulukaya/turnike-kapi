@@ -7,9 +7,9 @@ import {
     InfoCardTop,
     InfoCardTopLeft, InfoCardTopName,
     InfoCardTopPhoto, InfoCardUtils
-} from "../StudentPanel/style";
+} from "../../StudentPanel/style";
 import React, {useEffect} from "react";
-import {getStudent} from "../../redux/actions/userAction";
+import {getStudent} from "../../../redux/actions/userAction";
 import {ArrowLeftIcon, DeleteIcon, ExternalLinkIcon} from '@chakra-ui/icons'
 import {
     Icon,
