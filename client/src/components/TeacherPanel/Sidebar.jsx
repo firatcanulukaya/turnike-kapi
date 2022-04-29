@@ -1,5 +1,4 @@
-import {NavLink} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import jsCookie from "js-cookie";
 import {
@@ -34,7 +33,7 @@ const Nav = () => {
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                    <Box><img src={oomlLogo} style={{width: "50px"}}/></Box>
+                    <Box><Link to={"/ogretmen"}><img src={oomlLogo} style={{width: "50px"}}/></Link></Box>
                     <HStack spacing={8} alignItems={'center'}>
                         <HStack
                             as={'nav'}
