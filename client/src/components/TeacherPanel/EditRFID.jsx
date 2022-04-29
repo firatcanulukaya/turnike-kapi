@@ -15,11 +15,11 @@ import {
     useColorModeValue, Select
 } from "@chakra-ui/react";
 import {useEffect} from "react";
-import {getAllStudents, editStudent} from "../../redux/actions/userAction";
+import {editStudent, getAllUsers} from "../../redux/actions/userAction";
 
 const EditRFID = () => {
     const dispatch = useDispatch();
-    const {students} = useSelector(state => state.user);
+    const {users} = useSelector(state => state.user);
 
     const {
         register,
@@ -28,7 +28,7 @@ const EditRFID = () => {
     } = useForm();
 
     useEffect(() => {
-        const fetchData = async () => await dispatch(getAllStudents());
+        const fetchData = async () => await dispatch(getAllUsers());
         fetchData();
     }, []);
 
@@ -42,7 +42,7 @@ const EditRFID = () => {
             justify={'center'}>
             <Stack spacing={8} mx={'auto'} maxW={'3xl'} py={12} px={6}>
                 <Stack align={'center'}>
-                    <Heading fontSize={'3xl'}>Öğrenciye RFID Ekle</Heading>
+                    <Heading fontSize={'3xl'}>Kullanıcıya RFID Ekle</Heading>
                 </Stack>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Box
@@ -52,15 +52,15 @@ const EditRFID = () => {
                         p={8}>
                         <Stack spacing={4}>
                             <FormControl id="email">
-                                <FormLabel>Öğrenci</FormLabel>
-                                <Select placeholder="Öğrenci Seçiniz" type="number"
+                                <FormLabel>Kullanıcı</FormLabel>
+                                <Select placeholder="Kullanıcı Seçiniz" type="number"
                                         className={errors.id ? "error" : ""}
                                         {...register("id", {
                                             required: "Lütfen gerekli yerleri doldurunuz."
                                         })}>
                                     {
-                                        students.map((student, index) => (
-                                            <option key={index} value={student.id}>{student.nameSurname}</option>
+                                        users?.map((item, index) => (
+                                            <option key={index} value={item.id}>{item.nameSurname}</option>
                                         ))
                                     }
                                 </Select>
