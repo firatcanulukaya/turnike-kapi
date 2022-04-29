@@ -101,6 +101,45 @@ const getStudentById = async (req, res) => {
     }
 }
 
+const getStudentByJWTToken = async (req, res) => {
+    try {
+
+        const token = req.headers["x-access-token"];
+
+        const decoded = jwt.verify(token, "GENERATE_CODE", {
+            algorithms: ["HS256"]
+        });
+
+        const student = await db.Student.findOne({
+            where: {
+                id: decoded.id
+            },
+            attributes: {
+                exclude: ["password"]
+            },
+            include: [{
+                model: db.CovidTest,
+                as: "covidTest",
+                attributes: {
+                    exclude: ["userId"]
+                }
+            },
+                {
+                    model: db.Entries,
+                    as: "entries",
+                    attributes: {
+                        exclude: ["userId"]
+                    }
+                }]
+        });
+
+        return MessageService(res, student);
+
+    } catch (error) {
+        return ErrorService(res, error);
+    }
+}
+
 const updateStudent = async (req, res) => {
     try {
         const {id} = req.params;
@@ -172,45 +211,6 @@ const deleteAllStudents = async (req, res) => {
         });
 
         return MessageService(res, "ok");
-    } catch (error) {
-        return ErrorService(res, error);
-    }
-}
-
-const getStudentByJWTToken = async (req, res) => {
-    try {
-
-        const token = req.headers["x-access-token"];
-
-        const decoded = jwt.verify(token, "ooml", {
-            algorithms: ["HS256"]
-        });
-
-        const student = await db.Student.findOne({
-            where: {
-                id: decoded.id
-            },
-            attributes: {
-                exclude: ["password"]
-            },
-            include: [{
-                model: db.CovidTest,
-                as: "covidTest",
-                attributes: {
-                    exclude: ["userId"]
-                }
-            },
-                {
-                    model: db.Entries,
-                    as: "entries",
-                    attributes: {
-                        exclude: ["userId"]
-                    }
-                }]
-        });
-
-        return MessageService(res, student);
-
     } catch (error) {
         return ErrorService(res, error);
     }
