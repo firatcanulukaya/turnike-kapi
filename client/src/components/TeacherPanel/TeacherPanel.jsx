@@ -8,6 +8,8 @@ import Profile from "./Profile";
 import Students from "./Student/Students";
 import ViewStudent from "./Student/ViewStudent";
 import EditRFID from "./EditRFID";
+import ViewTeacher from "./Teacher/ViewTeacher";
+import Teachers from "./Teacher/Teachers";
 
 const TeacherPanel = () => {
     const dispatch = useDispatch();
@@ -35,6 +37,8 @@ const TeacherPanel = () => {
                 <Route path="/ogrenciler" element={<Students/>}/>
                 <Route path="/rfid-ekle" element={<EditRFID/>}/>
                 <Route path="/ogrenci/:id" element={<ViewStudent/>}/>
+                <Route path="/ogretmenler" element={<Teachers/>}/>
+                <Route path="/ogretmen/:id" element={<ViewTeacher/>}/>
             </Routes>
         </>
     )

@@ -1,9 +1,10 @@
-import {LOGIN_USER, GET_ALL_STUDENTS, GET_STUDENT} from "../types";
+import {LOGIN_USER, GET_ALL_STUDENTS, GET_STUDENT, GET_ALL_TEACHERS} from "../types";
 
 const initialState = {
     user: null,
     students: null,
-    student: null
+    student: null,
+    teachers: null,
 }
 
 export default (state = initialState, action) => {
@@ -22,6 +23,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 student: action.payload
+            }
+        case GET_ALL_TEACHERS:
+            return {
+                ...state,
+                teachers: action.payload
             }
         default:
             return state

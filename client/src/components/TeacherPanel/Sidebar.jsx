@@ -29,7 +29,6 @@ const Nav = () => {
         jsCookie.remove("ooml-auth-token");
         navigate('/');
     };
-
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -42,6 +41,7 @@ const Nav = () => {
                             spacing={4}
                             display={{base: 'none', md: 'flex'}}>
                             <NavLink to={"ogrenciler"}>Öğrenci Listesi</NavLink>
+                            {user?.roleId === 1 && <NavLink to={"ogretmenler"}>Öğretmen Listesi</NavLink>}
                             <NavLink to={"rfid-ekle"}>RFID Ekle</NavLink>
                         </HStack>
                     </HStack>

@@ -1,4 +1,4 @@
-import {LOGIN_USER, GET_STUDENT, GET_ALL_STUDENTS} from "../types";
+import {LOGIN_USER, GET_STUDENT, GET_ALL_STUDENTS, GET_ALL_TEACHERS} from "../types";
 import axios from "axios";
 import Cookies from "js-cookie";
 import alertify from "alertifyjs";
@@ -79,6 +79,19 @@ export const getAllStudents = () => dispatch => {
             dispatch({
                 type: GET_ALL_STUDENTS,
                 payload: res.data.message.filter(student => student.roleId === 3)
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+export const getAllTeachers = () => dispatch => {
+    axios.get("http://localhost:3001/api/student/getAll", tokenConfig())
+        .then(res => {
+            dispatch({
+                type: GET_ALL_TEACHERS,
+                payload: res.data.message.filter(student => student.roleId === 2)
             });
         })
         .catch(err => {
