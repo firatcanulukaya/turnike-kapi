@@ -1,4 +1,7 @@
+import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import jsCookie from "js-cookie";
 import {
     Box,
     Flex,
@@ -16,9 +19,6 @@ import {
 } from '@chakra-ui/react';
 import {MoonIcon, SunIcon} from '@chakra-ui/icons';
 import oomlLogo from '../../assets/img/oomlLogo.png';
-import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
-import jsCookie from "js-cookie";
 
 const Nav = () => {
     const {colorMode, toggleColorMode} = useColorMode();
@@ -29,12 +29,12 @@ const Nav = () => {
         jsCookie.remove("ooml-auth-token");
         navigate('/');
     };
+
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <Box><img src={oomlLogo} style={{width: "50px"}}/></Box>
-
                     <HStack spacing={8} alignItems={'center'}>
                         <HStack
                             as={'nav'}
@@ -42,11 +42,9 @@ const Nav = () => {
                             display={{base: 'none', md: 'flex'}}>
                             <NavLink to={"ogrenciler"}>Öğrenci Listesi</NavLink>
                             {user?.roleId === 1 && <NavLink to={"ogretmenler"}>Öğretmen Listesi</NavLink>}
-                            <NavLink to={"rfid-ekle"}>RFID Ekle</NavLink>
+                            {user?.roleId === 1 && <NavLink to={"rfid-ekle"}>RFID Ekle</NavLink>}
                         </HStack>
                     </HStack>
-
-
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7}>
                             <Button onClick={toggleColorMode}>
@@ -85,10 +83,8 @@ const Nav = () => {
                             </Menu>
                         </Stack>
                     </Flex>
-
                 </Flex>
             </Box>
-
         </>
     );
 }

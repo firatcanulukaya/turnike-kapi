@@ -12,12 +12,12 @@ const {
 } = require("../controllers/student.controller");
 const roleCheck = require("../middlewares/roleCheck.middleware");
 
-router.post("/create", roleCheck([2]), createStudent);
+router.post("/create", roleCheck(), createStudent);
 router.get("/getAll", getAllStudents);
 router.get("/get/:id", getStudentById);
-router.patch("/update/:id", roleCheck([2]), updateStudent);
-router.delete("/delete/:id", roleCheck([2]), deleteStudent);
-router.delete("/deleteAll", roleCheck(), deleteAllStudents);
 router.get("/getByJWTToken", getStudentByJWTToken);
+router.patch("/update/:id", roleCheck(), updateStudent);
+router.delete("/delete/:id", roleCheck(), deleteStudent);
+router.delete("/deleteAll", roleCheck(), deleteAllStudents);
 
 module.exports = router;

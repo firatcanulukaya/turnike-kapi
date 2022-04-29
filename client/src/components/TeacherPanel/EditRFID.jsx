@@ -16,10 +16,12 @@ import {
 } from "@chakra-ui/react";
 import {useEffect} from "react";
 import {editStudent, getAllUsers} from "../../redux/actions/userAction";
+import {useNavigate} from "react-router-dom";
 
 const EditRFID = () => {
     const dispatch = useDispatch();
-    const {users} = useSelector(state => state.user);
+    const navigate = useNavigate();
+    const {users, user} = useSelector(state => state.user);
 
     const {
         register,
@@ -31,6 +33,10 @@ const EditRFID = () => {
         const fetchData = async () => await dispatch(getAllUsers());
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (user?.roleId === 2) return navigate('/ogretmen');
+    }, [user]);
 
     const onSubmit = data => {
         dispatch(editStudent(data));

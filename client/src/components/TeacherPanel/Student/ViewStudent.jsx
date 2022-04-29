@@ -10,7 +10,7 @@ import {
 } from "../../StudentPanel/style";
 import React, {useEffect} from "react";
 import {getStudent} from "../../../redux/actions/userAction";
-import {ArrowLeftIcon, DeleteIcon, ExternalLinkIcon} from '@chakra-ui/icons'
+import {ArrowLeftIcon} from '@chakra-ui/icons'
 import {
     Icon,
     Table,

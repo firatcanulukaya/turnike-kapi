@@ -18,7 +18,7 @@ import {useDispatch, useSelector} from "react-redux";
 const Students = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {students} = useSelector(state => state.user);
+    const {students, user} = useSelector(state => state.user);
 
     const headers = ["İsim Soyisim", "Kimlik Numarası", "Sınıf", "RFID", "İşlemler"]
 
@@ -66,13 +66,13 @@ const Students = () => {
                                                 onClick={() => navigate(`/ogretmen/ogrenci/${item?.id}`)}
                                             />
 
-                                            <IconButton
+                                            {user?.roleId === 1 && <IconButton
                                                 colorScheme="red"
                                                 variant="outline"
                                                 icon={<DeleteIcon/>}
                                                 aria-label={"delete"}
                                                 onClick={() => deleteStudentHandler(item?.id)}
-                                            />
+                                            />}
                                         </ButtonGroup>
                                     </Td>
                                 </Tr>

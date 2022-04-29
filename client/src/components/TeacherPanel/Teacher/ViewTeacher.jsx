@@ -27,7 +27,7 @@ const ViewTeacher = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {student} = useSelector(state => state.user);
+    const {student, user} = useSelector(state => state.user);
 
     useEffect(() => {
         const fetchData = async () => await dispatch(getStudent(id));
@@ -35,6 +35,10 @@ const ViewTeacher = () => {
     }, [dispatch, id]);
 
     const headers = ["Tür", "Tarih"];
+
+    useEffect(() => {
+        if(user?.roleId === 2) return navigate('/ogretmen');
+    }, [user]);
 
     if (student === null) return <div>Yükleniyor...</div>;
     return (

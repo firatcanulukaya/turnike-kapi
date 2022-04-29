@@ -18,7 +18,7 @@ import {useDispatch, useSelector} from "react-redux";
 const Teachers = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {teachers} = useSelector(state => state.user);
+    const {teachers, user} = useSelector(state => state.user);
 
     const headers = ["İsim Soyisim", "Kimlik Numarası", "RFID", "İşlemler"]
 
@@ -31,9 +31,12 @@ const Teachers = () => {
         await dispatch(deleteStudent(id));
     }
 
+    useEffect(() => {
+        if (user?.roleId === 2) return navigate('/ogretmen');
+    }, [user]);
+
     if (teachers === null) return <div>Yükleniyor...</div>;
     return (
-
         <>
             <TableContainer>
                 <Table variant='simple'>
