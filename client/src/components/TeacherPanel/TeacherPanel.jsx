@@ -10,6 +10,7 @@ import ViewStudent from "./Student/ViewStudent";
 import EditRFID from "./EditRFID";
 import ViewTeacher from "./Teacher/ViewTeacher";
 import Teachers from "./Teacher/Teachers";
+import TeacherIndex from "./TeacherIndex";
 
 const TeacherPanel = () => {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const TeacherPanel = () => {
         <>
             <Sidebar/>
             <Routes>
+                <Route path="/" element={<TeacherIndex/>}/>
                 <Route path="/profil" element={<Profile/>}/>
                 <Route path="/ogrenciler" element={<Students/>}/>
                 <Route path="/rfid-ekle" element={<EditRFID/>}/>
