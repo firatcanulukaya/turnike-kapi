@@ -63,7 +63,7 @@ export const registerUser = data => dispatch => {
         .catch(err => {
             switch (err.response.data.message) {
                 case "STUDENT_ALREADY_EXISTS":
-                    alertify.error("Öğrenci zaten mevcut");
+                    alertify.error("Kullanıcı zaten mevcut");
                     break;
                 default:
                     alertify.error("Bir hata oluştu");
@@ -110,7 +110,7 @@ export const getStudent = id => dispatch => {
         .catch(err => {
             switch (err.response.data.message) {
                 case "STUDENT_NOT_FOUND":
-                    alertify.error("Öğrenci bulunamadı");
+                    alertify.error("Kullanıcı bulunamadı");
                     break;
                 default:
                     alertify.error("Bir hata oluştu");
@@ -139,7 +139,7 @@ export const deleteStudent = id => dispatch => {
         .catch(err => {
             switch (err.response.data.message) {
                 case "STUDENT_NOT_FOUND":
-                    alertify.error("Öğrenci bulunamadı");
+                    alertify.error("Kullanıcı bulunamadı");
                     break;
                 default:
                     alertify.error("Bir hata oluştu");
@@ -152,7 +152,7 @@ export const deleteStudent = id => dispatch => {
 export const editStudent = data => dispatch => {
     axios.patch(`http://localhost:3001/api/student/update/${data.id}`, data, tokenConfig())
         .then(() => {
-            alertify.success("Öğrenci güncellendi");
+            alertify.success("Kullanıcı güncellendi");
             axios.get("http://localhost:3001/api/student/getAll", tokenConfig())
                 .then(res => {
                     dispatch({
@@ -168,7 +168,7 @@ export const editStudent = data => dispatch => {
         .catch(err => {
             switch (err.response.data.message) {
                 case "STUDENT_NOT_FOUND":
-                    alertify.error("Öğrenci bulunamadı");
+                    alertify.error("Kullanıcı bulunamadı");
                     break;
                 default:
                     alertify.error("Bir hata oluştu");
