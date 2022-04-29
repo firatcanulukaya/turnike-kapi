@@ -50,7 +50,19 @@ export const getUserByToken = () => dispatch => {
             });
         })
         .catch(err => {
-            console.log(err);
+            switch (err.response.data.message) {
+                case "STUDENT_NOT_FOUND":
+                    alertify.error("Kullanıcı bulunamadı.");
+                    break;
+                case "INVALID_TOKEN":
+                    alertify.error("Tekrardan giriş yapınız.");
+                    break;
+                default:
+                    alertify.error("Bir hata oluştu");
+                    console.log(err.response.data);
+                    break;
+            }
+            window.location.href = "/";
         });
 }
 
