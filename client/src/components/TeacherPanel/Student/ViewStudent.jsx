@@ -85,8 +85,7 @@ const ViewStudent = () => {
                 </InfoCard>
             </InfoCardContainer>
 
-
-            <TableContainer>
+            <TableContainer pt={20}>
                 <Table variant='simple'>
                     <TableCaption>Öğrenci Giriş Çıkış Listesi</TableCaption>
                     <Thead>

@@ -37,7 +37,7 @@ const ViewTeacher = () => {
     const headers = ["Tür", "Tarih"];
 
     useEffect(() => {
-        if(user?.roleId === 2) return navigate('/ogretmen');
+        if (user?.roleId === 2) return navigate('/ogretmen');
     }, [user]);
 
     if (student === null) return <div>Yükleniyor...</div>;
@@ -84,8 +84,7 @@ const ViewTeacher = () => {
                 </InfoCard>
             </InfoCardContainer>
 
-
-            <TableContainer>
+            <TableContainer pt={20}>
                 <Table variant='simple'>
                     <TableCaption>Öğretmen Giriş Çıkış Listesi</TableCaption>
                     <Thead>

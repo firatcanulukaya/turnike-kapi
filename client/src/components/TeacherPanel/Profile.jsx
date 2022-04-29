@@ -85,9 +85,9 @@ const Profile = () => {
             </InfoCardContainer>
 
 
-            <TableContainer>
+            <TableContainer pt={20}>
                 <Table variant='simple'>
-                    <TableCaption>Öğrenci Giriş Çıkış Listesi</TableCaption>
+                    <TableCaption>Giriş Çıkış Kaydın</TableCaption>
                     <Thead>
                         <Tr>
                             {
