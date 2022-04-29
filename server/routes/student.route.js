@@ -16,7 +16,7 @@ router.post("/create", roleCheck(), createStudent);
 router.get("/getAll", getAllStudents);
 router.get("/get/:id", getStudentById);
 router.get("/getByJWTToken", getStudentByJWTToken);
-router.patch("/update/:id", roleCheck(), updateStudent);
+router.patch("/update/:id", roleCheck([2]), updateStudent);
 router.delete("/delete/:id", roleCheck(), deleteStudent);
 router.delete("/deleteAll", roleCheck(), deleteAllStudents);
 

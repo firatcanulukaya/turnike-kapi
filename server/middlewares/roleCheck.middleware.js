@@ -1,11 +1,5 @@
 const ErrorService = require("../services/error.service");
-const {
-    ROLES: {ADMIN},
-} = require("../constants");
-
-const {
-    ROLES
-} = require("../constants");
+const {ADMIN} = require("../constants");
 
 const roleCheck = (allowed = []) => {
     return (req, res, next) => {
@@ -24,4 +18,3 @@ const roleCheck = (allowed = []) => {
 };
 
 module.exports = roleCheck;
-module.exports.ROLES = ROLES;
