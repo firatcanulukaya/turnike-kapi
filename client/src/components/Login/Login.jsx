@@ -87,7 +87,7 @@ const Login = () => {
                                        {...register("password", {
                                            required: "Lütfen gerekli yerleri doldurunuz.",
                                            minLength: {
-                                               value: 4,
+                                               value: 8,
                                                message: "Lütfen en az 8 karakter giriniz.",
                                            },
                                            maxLength: {
