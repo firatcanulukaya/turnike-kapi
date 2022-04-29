@@ -193,6 +193,9 @@ export const editStudent = data => dispatch => {
                 case "NOT_AUTHORIZED":
                     alertify.error("Yetkisiz işlem.");
                     break;
+                case "RFID_EXIST":
+                    alertify.error("RFID kodu zaten kullanılıyor.");
+                    break;
                 default:
                     alertify.error("Bir hata oluştu");
                     console.log(err.response.data);
