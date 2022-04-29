@@ -156,7 +156,10 @@ export const deleteStudent = id => dispatch => {
         .catch(err => {
             switch (err.response.data.message) {
                 case "STUDENT_NOT_FOUND":
-                    alertify.error("Kullanıcı bulunamadı");
+                    alertify.error("Kullanıcı bulunamadı.");
+                    break;
+                case "NOT_AUTHORIZED":
+                    alertify.error("Yetkisiz işlem.");
                     break;
                 default:
                     alertify.error("Bir hata oluştu");
@@ -186,6 +189,9 @@ export const editStudent = data => dispatch => {
             switch (err.response.data.message) {
                 case "STUDENT_NOT_FOUND":
                     alertify.error("Kullanıcı bulunamadı");
+                    break;
+                case "NOT_AUTHORIZED":
+                    alertify.error("Yetkisiz işlem.");
                     break;
                 default:
                     alertify.error("Bir hata oluştu");
