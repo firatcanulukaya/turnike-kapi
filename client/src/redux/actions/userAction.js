@@ -80,15 +80,7 @@ export const getAllStudents = () => dispatch => {
                 type: GET_ALL_STUDENTS,
                 payload: res.data.message.filter(student => student.roleId === 3)
             });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
 
-export const getAllTeachers = () => dispatch => {
-    axios.get("http://localhost:3001/api/student/getAll", tokenConfig())
-        .then(res => {
             dispatch({
                 type: GET_ALL_TEACHERS,
                 payload: res.data.message.filter(student => student.roleId === 2)

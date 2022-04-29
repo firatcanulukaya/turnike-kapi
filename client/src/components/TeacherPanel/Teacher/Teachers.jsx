@@ -12,7 +12,7 @@ import {
     Tfoot, TableCaption, TableContainer
 } from "@chakra-ui/react";
 import {ExternalLinkIcon, DeleteIcon} from "@chakra-ui/icons";
-import {getAllTeachers, deleteStudent} from "../../../redux/actions/userAction";
+import {getAllStudents, deleteStudent} from "../../../redux/actions/userAction";
 import {useDispatch, useSelector} from "react-redux";
 
 const Teachers = () => {
@@ -23,7 +23,7 @@ const Teachers = () => {
     const headers = ["İsim Soyisim", "Kimlik Numarası", "RFID", "İşlemler"]
 
     useEffect(() => {
-        const fetchData = async () => await dispatch(getAllTeachers());
+        const fetchData = async () => await dispatch(getAllStudents());
         fetchData();
     }, []);
 
