@@ -144,14 +144,10 @@ const updateStudent = async (req, res) => {
     try {
         const {id} = req.params;
         const {rfid, idCard, studentId, roleId} = req.body
-
-        if (roleId > 3 || roleId < 2) {
-            throw new Error("INVALID_ROLE");
-        }
-
         const student = await db.Student.findOne({where: {id}});
 
-        if (student.dataValues.roleId < req.user.roleId) throw new Error("FORBIDDEN");
+        if (student.dataValues.roleId < req.user.roleId || roleId < req.user.roleId) throw new Error("FORBIDDEN");
+        if (roleId > 3 || roleId < 1) throw new Error("INVALID_ROLE");
 
         if (rfid) {
             const checkRfid = await db.Student.findOne({where: {rfid}});
