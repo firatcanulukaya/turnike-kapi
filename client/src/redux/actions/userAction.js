@@ -196,6 +196,12 @@ export const editStudent = (data, id) => dispatch => {
                 case "RFID_EXIST":
                     alertify.error("RFID kodu zaten kullanılıyor.");
                     break;
+                case "STUDENT_ID_EXIST":
+                    alertify.error("Öğrenci numarası zaten kullanılıyor.");
+                    break;
+                case "ID_CARD_EXIST":
+                    alertify.error("Kimlik kartı zaten kullanılıyor.");
+                    break;
                 default:
                     alertify.error("Bir hata oluştu");
                     console.log(err.response.data);
