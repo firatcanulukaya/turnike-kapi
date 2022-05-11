@@ -30,6 +30,9 @@ const login = async (req, res) => {
             },
             "GENERATE_CODE",
             {expiresIn: "24h"});
+
+        req.session.access_token = token;
+
         return MessageService(res, token);
     } catch (error) {
         return ErrorService(res, error);

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const authCheck = (req, res, next) => {
-    const token = req.headers["x-access-token"];
+    const token = req.session.access_token || req.headers["x-access-token"];
 
     if (!token) {
         return res.status(403).json({
@@ -15,7 +15,7 @@ const authCheck = (req, res, next) => {
         });
         req.user = decoded;
     } catch (err) {
-        return res.status(401).json({ message: "INVALID_TOKEN", statusCode: 401 });
+        return res.status(401).json({message: "INVALID_TOKEN", statusCode: 401});
     }
     return next();
 };

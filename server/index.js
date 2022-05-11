@@ -1,10 +1,18 @@
 const express = require("express");
 const {json} = require("body-parser");
 const cors = require("cors");
+const session = require("express-session");
 const app = express();
 
 app.use(cors());
 app.use(json());
+app.use(
+    session({
+        secret: "OSMANOREKMESLEKLISESI2022",
+        resave: true,
+        saveUninitialized: true,
+    })
+);
 
 app.use(function (req, res, next) {
     res.setHeader("X-Powered-By", "12-BT IT TEAM V1.0.0 - 2022");
