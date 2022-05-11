@@ -169,8 +169,8 @@ export const deleteStudent = id => dispatch => {
         });
 }
 
-export const editStudent = data => dispatch => {
-    axios.patch(`http://localhost:3001/api/student/update/${data.id}`, data, tokenConfig())
+export const editStudent = (data, id) => dispatch => {
+    axios.patch(`http://localhost:3001/api/student/update/${id || data.id}`, data, tokenConfig())
         .then(() => {
             alertify.success("Kullanıcı güncellendi");
             axios.get("http://localhost:3001/api/student/getAll", tokenConfig())

@@ -22,7 +22,7 @@ const NotFound = () => {
                 </Text>
 
                 <Button
-                    colorScheme="teal"
+                    colorScheme="blue"
                     bgGradient="linear(to-r, blue.400, blue.500, blue.600)"
                     color="white"
                     variant="solid" onClick={() => navigate(-1)}>

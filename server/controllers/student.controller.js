@@ -143,9 +143,9 @@ const getStudentByJWTToken = async (req, res) => {
 const updateStudent = async (req, res) => {
     try {
         const {id} = req.params;
-        const {rfid, idCard, studentId} = req.body
+        const {rfid, idCard, studentId, roleId} = req.body
 
-        if (req.body.roleId > 3 || req.body.roleId < 2) {
+        if (roleId > 3 || roleId < 2) {
             throw new Error("INVALID_ROLE");
         }
 
@@ -153,8 +153,10 @@ const updateStudent = async (req, res) => {
 
         if (student.dataValues.roleId < req.user.roleId) throw new Error("FORBIDDEN");
 
-        const checkRfid = await db.Student.findOne({where: {rfid}});
-        if (checkRfid) throw new Error("RFID_EXIST");
+        if (rfid) {
+            const checkRfid = await db.Student.findOne({where: {rfid}});
+            if (checkRfid) throw new Error("RFID_EXIST");
+        }
 
         await db.Student.update(req.body,
             {

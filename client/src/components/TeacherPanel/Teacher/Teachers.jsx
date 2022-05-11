@@ -11,8 +11,8 @@ import {
     Th,
     Tfoot, TableCaption, TableContainer
 } from "@chakra-ui/react";
-import {ExternalLinkIcon, DeleteIcon} from "@chakra-ui/icons";
-import {getAllStudents, deleteStudent} from "../../../redux/actions/userAction";
+import {ExternalLinkIcon, DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {getAllStudents, deleteStudent, editStudent} from "../../../redux/actions/userAction";
 import {useDispatch, useSelector} from "react-redux";
 
 const Teachers = () => {
@@ -29,6 +29,10 @@ const Teachers = () => {
 
     const deleteStudentHandler = async (id) => {
         await dispatch(deleteStudent(id));
+    }
+
+    const updateStudentToTeacher = async (data, id) => {
+        await dispatch(editStudent(data, id));
     }
 
     useEffect(() => {
@@ -75,6 +79,14 @@ const Teachers = () => {
                                                 aria-label={"delete"}
                                                 onClick={() => deleteStudentHandler(item?.id)}
                                             />
+
+                                            <IconButton
+                                                colorScheme="green"
+                                                icon={<EditIcon/>}
+                                                aria-label={"delete"}
+                                                onClick={() => updateStudentToTeacher({roleId: 3}, item?.id)}
+                                            />
+
                                         </ButtonGroup>
                                     </Td>
                                 </Tr>
