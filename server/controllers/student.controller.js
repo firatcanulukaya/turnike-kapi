@@ -14,7 +14,7 @@ const createStudent = async (req, res) => {
         }
 
         let getRfid = await db.Student.findOne({where: {rfid}});
-        if (getRfid) {
+        if (getRfid && rfid !== "") {
             throw new Error("RFID_ALREADY_EXISTS");
         }
 
@@ -151,7 +151,17 @@ const updateStudent = async (req, res) => {
 
         if (rfid) {
             const checkRfid = await db.Student.findOne({where: {rfid}});
-            if (checkRfid) throw new Error("RFID_EXIST");
+            if (checkRfid && rfid !== "") throw new Error("RFID_EXIST");
+        }
+
+        if (studentId) {
+            const checkStudentId = await db.Student.findOne({where: {studentId}});
+            if (checkStudentId) throw new Error("STUDENT_ID_EXIST");
+        }
+
+        if (idCard) {
+            const checkIdCard = await db.Student.findOne({where: {idCard}});
+            if (checkIdCard) throw new Error("ID_CARD_EXIST");
         }
 
         await db.Student.update(req.body,
