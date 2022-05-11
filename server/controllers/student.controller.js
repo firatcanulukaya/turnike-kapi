@@ -104,7 +104,7 @@ const getStudentById = async (req, res) => {
 const getStudentByJWTToken = async (req, res) => {
     try {
 
-        const token = req.headers["x-access-token"];
+        const token = req.session.access_token || req.headers["x-access-token"];
 
         const decoded = jwt.verify(token, "GENERATE_CODE", {
             algorithms: ["HS256"]
